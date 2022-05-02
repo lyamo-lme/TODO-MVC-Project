@@ -1,0 +1,30 @@
+﻿@model ViewModel
+@{
+}
+<form asp-action="EditTask"   method="post">
+    <div>
+        <label> name task<label />
+            <input asp-for="EditModel.NameTask" value="@Model.EditModel.NameTask"></input>
+    </div>
+    <input hidden asp-for="EditModel.Id" value="@Model.EditModel.Id">
+
+    <div>
+        <label>Dead Line</label>
+        <input asp-for="EditModel.DeadLine" value="@Model.EditModel.DeadLine">
+    </div>
+    <div>
+        <label>Task Completed</label>
+        <select asp-for="EditModel.TaskCompleted">
+            <option value="1">Done </option>
+            <option value="0">Not Done</option>
+        </select>
+    </div>
+    <div>
+        <select asp-for="EditModel.CategoryId">
+             @foreach(var category in Model.Categories){
+        <option required value="@category.IdCategory"> @category.NameCategory</option>      
+        }
+        </select>
+    </div>
+    <button type="submit">Change task</button>
+</form>

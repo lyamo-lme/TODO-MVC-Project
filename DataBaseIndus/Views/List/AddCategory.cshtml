@@ -1,0 +1,23 @@
+﻿@model DataBaseIndus.Models.ViewModel
+@{
+}
+<form asp-action="CreateTask" method="post">
+    <div asp-validation-summary="All"></div>
+    <div>
+    <lavel asp-for="Addtask.NameTask">Имя задания</lavel>
+    <input asp-for="Addtask.NameTask"/>
+    </div>
+        <div>
+    <label>Дата выполнения</label>
+    <input asp-for="Addtask.DeadLine"/>
+    </div>
+    <div>
+    <label>Категория</label>
+    <select asp-for="Addtask.CategoryId"> 
+        @foreach(var category in Model.Categories){
+        <option required value="@category.IdCategory"> @category.NameCategory</option>      
+        }
+        </select>
+    </div>
+    <button type="submit">Создать</button>
+ </form>

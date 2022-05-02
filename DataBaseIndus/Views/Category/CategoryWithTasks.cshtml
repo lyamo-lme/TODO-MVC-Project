@@ -1,0 +1,35 @@
+﻿@model Category
+@{
+}
+<h1>@Model.NameCategory</h1>
+<table class="tasks">
+    <tr>
+        <th>NameTask</th>
+        <th>DeadLine</th>
+        <th>DoneTask</th>
+        <th>Actions</th>
+    </tr>
+    @foreach  (var task in @Model.tasks)
+    {
+        <tr>
+            <td>@task.NameTask</td>
+            <td>@task.DeadLine</td>
+            @if  (@task.TaskCompleted  ==  0)
+            
+            {
+                
+                <td>Undone</td>
+            }
+            
+            else
+            
+            {
+
+                <td>Done</td>
+            }
+            <td><a asp-controller="List" asp-action="EditTask" asp-route-id="@task.Id">Edit</a>|<a  asp-controller="List" asp-action="DeleteTask" asp-route-id="@task.Id">Delete</a></td>
+            <td><a asp-controller="List" asp-action="ChangeStatusDone" asp-route-message="@ViewContext.HttpContext.Request.Path" asp-route-id="@task.Id">Change status done</a></td>
+        </tr>
+    }
+</table>
+

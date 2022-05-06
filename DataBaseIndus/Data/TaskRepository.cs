@@ -51,7 +51,10 @@ namespace DataBaseIndus.Data
             using (IDbConnection connection = Connection)
             {
                 connection.Open();
-                List<Tasks> tasks = connection.Query<Tasks, Category, Tasks>(query, (a, b) => { a.category = b; return a; }, splitOn: "IdCategory").ToList();
+                /* List<Tasks> tasks = connection.Query<Tasks, Category, Tasks>(query, (a, b) => { a.category = b; return a; }, splitOn: "IdCategory").ToList();
+             */
+                List<Tasks> tasks = connection.Query<Tasks>(query).ToList();
+
                 connection.Close();
                 return tasks;
             }

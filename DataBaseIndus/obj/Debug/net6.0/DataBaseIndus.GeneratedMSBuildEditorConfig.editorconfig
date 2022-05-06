@@ -43,8 +43,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/AddCategory.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxBZGRDYXRlZ29yeS5jc2h0bWw=
+[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/AddTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxBZGRUYXNrLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/DeleteTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxEZWxldGVUYXNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/EditTaskForm.cshtml]

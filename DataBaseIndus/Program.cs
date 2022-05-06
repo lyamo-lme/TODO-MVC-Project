@@ -4,6 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
 builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+/*
+builder.Services.AddSingleton<ICategoryRepository, CategoryRepositoryXML>();
+builder.Services.AddSingleton<ITaskRepository, TaskRepositoryXML>();*/
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -28,6 +32,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=List}/{action=Index}/{id?}");
 
 app.Run();

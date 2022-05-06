@@ -1,66 +1,71 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DataBaseIndus.Data;
 using DataBaseIndus.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Data;
-using System.Data.SqlClient;
-using Dapper;
+using AutoMapper;
+
+
 
 namespace DataBaseIndus.Controllers
 {
     public class ListController : Controller
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration Configuration;
         public ICategoryRepository CategoryConnection { get; set; }
+        public IMapper Mapper { get; set; }
         public ITaskRepository TaskConnection { get; set; }
-        public ListController(IConfiguration configuration, ITaskRepository taskRepository, ICategoryRepository categoryRepository)
+        public ListController(IMapper mapper,IConfiguration configuration, ITaskRepository taskRepository, ICategoryRepository categoryRepository)
         {
-            _configuration = configuration;
+            Configuration = configuration;
             TaskConnection = taskRepository;
             CategoryConnection = categoryRepository;
+            Mapper = mapper;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            var model = TaskConnection.GetTasks();
+            /* TaskRepositoryXML model1 = new TaskRepositoryXML();
+             TaskConnection = model1;*/
+            ViewModel model = new ViewModel
+            {
+                Tasks = TaskConnection.GetTasks(),
+                Categories = CategoryConnection.GetCategories()
+            };
             return View("ListTasks", model);
         }
-        [HttpGet]
-        public IActionResult CreateTask()
-        {
-            var model = new ViewModel();
-            model.Categories = CategoryConnection.GetCategories();
-            return View("AddCategory", model);
-        }
         [HttpPost]
-        public IActionResult CreateTask(ViewModel task)
+        public IActionResult CreateTask(ViewModel model)
         {
 
-            if (task.Addtask.IsValid())
+            if (model.AddTask.IsValid())
             {
-                TaskConnection.AddTask(task.Addtask);
+                TaskConnection.AddTask(model.AddTask);
                 return RedirectToAction("Index");
             }
             else
             {
-                var model = new ViewModel();
-                model.Categories = CategoryConnection.GetCategories();
-                return View("AddCategory", model);
+                ModelState.Clear();
+                ModelState.AddModelError("AddTask.NameTask", "Validation name");
+                model = new ViewModel
+                {
+                    Tasks = TaskConnection.GetTasks(),
+                    Categories = CategoryConnection.GetCategories()
+                };
+                return View("ListTasks", model);
             }
         }
         [HttpGet]
         public IActionResult EditTask(int id)
         {
             ViewModel model = new ViewModel();
-            model.Task = TaskConnection.GetTaskId(id);
-            model.Categories = CategoryConnection.GetCategories();
-            EditTask edittask = new EditTask();
-            edittask.NameTask = model.Task.NameTask;
-            edittask.Id = id;
-            edittask.TaskCompleted = model.Task.TaskCompleted;
-            edittask.CategoryId = model.Task.CategoryId;
-            edittask.DeadLine = model.Task.DeadLine;
-            model.EditModel = edittask;
+             model.Categories = CategoryConnection.GetCategories();
+           /*  EditTask edittask = new EditTask();
+             edittask.NameTask = model.Task.NameTask;
+             edittask.Id = id;
+             edittask.TaskCompleted = model.Task.TaskCompleted;
+             edittask.CategoryId = model.Task.CategoryId;
+             edittask.DeadLine = model.Task.DeadLine;
+             model.EditModel = edittask;*/
+            model.EditModel = Mapper.Map<EditTask>(TaskConnection.GetTaskId(id));
             return View("EditTaskForm", model);
         }
         [HttpPost]
@@ -69,33 +74,37 @@ namespace DataBaseIndus.Controllers
             TaskConnection.UpdateTask(model.EditModel);
             return RedirectToAction("Index");
         }
-        [HttpGet]
-        public IActionResult DeleteTask(int id) {
-            if (id != 0)
-            {
-                TaskConnection.DeleteTask(id);
-            }
+        public IActionResult DeleteTask(int? id)
+        {
+            DeleteTaskViewModel model = Mapper.Map<DeleteTaskViewModel>(TaskConnection.GetTaskId(id));
+            return View("DeleteTask", model);
+        }
+        [HttpPost]
+        public IActionResult DeleteTask(int id)
+        {
+            TaskConnection.DeleteTask(id);
             return RedirectToAction("Index");
         }
-        public IActionResult ChangeStatusDone(string message,int? id) {
-            if (id != null) {
+        public IActionResult ChangeStatusDone(string message, int? id)
+        {
+            if (id != null)
+            {
                 Tasks model = TaskConnection.GetTaskId(id);
-                if (model.TaskCompleted == 1) {
-                    model.TaskCompleted = 0;
-                }else
-                if (model.TaskCompleted == 0) {
-                    model.TaskCompleted = 1;
-                }
-           TaskConnection.UpdateTask(new EditTask { Id = model.Id, TaskCompleted = model.TaskCompleted, DeadLine = model.DeadLine, NameTask = model.NameTask, CategoryId = model.CategoryId });  }
+                model.TaskCompleted = !model.TaskCompleted;
+                TaskConnection.UpdateTask(new EditTask { Id = model.Id, TaskCompleted = model.TaskCompleted, DeadLine = model.DeadLine, NameTask = model.NameTask, CategoryId = model.CategoryId });
+            }
             return Redirect(message);
         }
-        public IActionResult GetDoneOrUnDoneTask(int? mode) {
+        public IActionResult GetDoneOrUnDoneTask(int? mode)
+        {
             var model = TaskConnection.GetTasks();
-            if (mode == 1) { 
-            model = TaskConnection.GetTasks(1);
+            if (mode == 1)
+            {
+                model = TaskConnection.GetTasks(1);
             }
-            if (mode == 2) {
-            model = TaskConnection.GetTasks(2);
+            if (mode == 2)
+            {
+                model = TaskConnection.GetTasks(2);
             }
             return View("ListTasks", model);
         }

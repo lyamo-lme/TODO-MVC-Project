@@ -8,9 +8,8 @@ namespace DataBaseIndus.Models
         [Required(ErrorMessage = "Please name")]
         public string NameTask { get; set; }
         public DateTime? DeadLine { get; set; }
-       
         public int CategoryId { get; set; }
-        public int TaskCompleted { get; set; }=0;
-        public virtual Category category { get; set; }
+        public bool TaskCompleted { get; set; } = false;
+        public virtual string? NameCategory { get; set; }
     } 
 }

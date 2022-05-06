@@ -15,12 +15,12 @@
     <div>
         <label>Task Completed</label>
         <select asp-for="EditModel.TaskCompleted">
-            <option value="1">Done </option>
-            <option value="0">Not Done</option>
+            <option value="true">Done </option>
+            <option value="false">Not Done</option>
         </select>
     </div>
     <div>
-        <select asp-for="EditModel.CategoryId">
+        <select asp-for="EditModel.CategoryId" value="@Model.EditModel.CategoryId">
              @foreach(var category in Model.Categories){
         <option required value="@category.IdCategory"> @category.NameCategory</option>      
         }

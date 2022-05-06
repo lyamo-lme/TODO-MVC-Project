@@ -9,6 +9,6 @@ namespace DataBaseIndus.Models
         public string NameTask { get; set; }
         public DateTime? DeadLine { get; set; }
         public int CategoryId { get; set; }
-        public int TaskCompleted { get; set; } = 0;
+        public bool TaskCompleted { get; set; }
     }
 }

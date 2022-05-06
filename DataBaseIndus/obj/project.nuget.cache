@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "sqgbHgQ2jP28Q5M9GzaQVCy7G/1/0hFkRUheMefV0l9LC07BfdIga0Zwl8GUyRmQq/M43F9sfJjmdLwstg8M8A==",
+  "dgSpecHash": "QoLlxtvJkFBWa76Ubm6HhjE3LNdFQ0ln8k8mlhYmHh3y8EgfBofGskfTaVSM7ZeR08F9Y2VR52nqOGLl2nKi+Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\DataBaseIndus.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\макс\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
+    "C:\\Users\\макс\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\макс\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\макс\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.4\\microsoft.entityframeworkcore.6.0.4.nupkg.sha512",

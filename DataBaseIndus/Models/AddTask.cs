@@ -11,8 +11,14 @@ namespace DataBaseIndus.Models
         public int CategoryId { get; set; }
         public int TaskCompleted { get; set; } = 0;
         public bool IsValid() {
-            if (NameTask != null) { return true; }
-            return false;
+            if (string.IsNullOrEmpty(NameTask))
+            {
+                return false;
+            }
+            if (CategoryId==0||CategoryId<0) {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -1,0 +1,10 @@
+﻿@model DeleteTaskViewModel
+@{
+}
+<h1> Do you want delete?</h1>
+<div>
+ <p>@Model.NameTask</p>
+ </div>
+ <form asp-action="DeleteTask"  method="post" asp-route-id="@Model.Id">
+     <button type="submit">Delete</button>
+ </form>

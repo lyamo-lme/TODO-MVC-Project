@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace DataBaseIndus.Models
+namespace ToDoList.Models
 {
     public class Tasks
     {

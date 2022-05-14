@@ -1,26 +1,26 @@
 ﻿using Dapper;
-using DataBaseIndus.Models;
+using ToDoList.Models;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DataBaseIndus.Data
+namespace ToDoList.Data
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly IConfiguration _configuration;
-        private readonly string ConnectionString;
+        private readonly IConfiguration configuration;
+        private readonly string connectionString;
         public CategoryRepository(IConfiguration configuration)
         {
-            _configuration = configuration;
-            ConnectionString = _configuration.GetConnectionString("DefaultConnection");
+            this.configuration = configuration;
+            connectionString = this.configuration.GetConnectionString("DefaultConnection");
         }
         public IDbConnection Connection
         {
 
-            get => new SqlConnection(ConnectionString);
+            get => new SqlConnection(connectionString);
 
         }
-        public void AddCategory(Category model)
+        public void AddCategory(AddCategory model)
         {
             using (Connection)
             {
@@ -46,6 +46,17 @@ namespace DataBaseIndus.Data
             }
 
         }
+        public Category GetCategoryById(int id) {
+            var sql = @"select b.IdCategory , b.NameCategory from Categories b where IdCategory = @id ";
+            using (IDbConnection connection = Connection)
+            {
+                connection.Open();
+                Category category = connection.Query<Category>(sql, new { id }).FirstOrDefault();
+                connection.Close();
+                return category;
+            }
+
+        }
         public void DeleteCategory(int id) {
             using (IDbConnection connection = Connection)
             {
@@ -53,7 +64,7 @@ namespace DataBaseIndus.Data
                 connection.Open();
                 connection.Query(sql);
                 connection.Close();
-            }
+             }
         }
         public void EditCategory(Category model) {
             using (IDbConnection connection = Connection)

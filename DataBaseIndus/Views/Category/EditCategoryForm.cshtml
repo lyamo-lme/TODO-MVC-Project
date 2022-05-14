@@ -2,11 +2,9 @@
 @{
 }
 <form asp-action="EditCategory">
-
     <div asp-validation-summary="All"></div>
-    <input hidden asp-for="@Model.IdCategory"></input>
+    <input hidden asp-for="IdCategory" value="@Model.IdCategory"></input>
     <label asp-for="NameCategory">Name Category</label>
     <input asp-for="NameCategory" value="@Model.NameCategory">
     <button type="submit">Edit Category</button>
-
 </form>

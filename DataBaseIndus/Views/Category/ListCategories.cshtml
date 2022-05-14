@@ -10,7 +10,7 @@
     @foreach(var category in @Model){
     <tr>
     <td><a asp-action="CategoryWithTasks" asp-route-id="@category.IdCategory">@category.NameCategory</a></td>
-    <td><a asp-action="EditCategory" asp-route-id="@category.IdCategory">Edit</a>|<a  asp-action="DeleteCategory" asp-route-id="@category.IdCategory">Delete</a> </td>
+    <td><a asp-action="EditCategory" asp-route-id="@category.IdCategory">Edit</a>|<a asp-action="DeleteCategory" asp-route-id="@category.IdCategory">Delete</a> </td>
     </tr>
     }
 </table>

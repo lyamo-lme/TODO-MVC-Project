@@ -1,17 +1,15 @@
 using DataBaseIndus.Data;
-using Microsoft.EntityFrameworkCore;
+using ToDoList.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<CategoryRepositoryXML>();
+builder.Services.AddTransient<TaskRepositoryXML>();
+builder.Services.AddTransient<TaskRepository>();
+builder.Services.AddTransient<CategoryRepository>();
 
-builder.Services.AddSingleton<ITaskRepository, TaskRepository>();
-builder.Services.AddSingleton<ICategoryRepository, CategoryRepository>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-/*
-builder.Services.AddSingleton<ICategoryRepository, CategoryRepositoryXML>();
-builder.Services.AddSingleton<ITaskRepository, TaskRepositoryXML>();*/
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
 
 var app = builder.Build();
 

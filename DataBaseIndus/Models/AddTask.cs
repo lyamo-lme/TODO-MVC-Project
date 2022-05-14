@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DataBaseIndus.Models
+namespace ToDoList.Models
 {
     public class AddTask
     {
@@ -9,7 +9,7 @@ namespace DataBaseIndus.Models
         public DateTime? DeadLine { get; set; }
         [Required(ErrorMessage = "Please enter Category")]
         public int CategoryId { get; set; }
-        public int TaskCompleted { get; set; } = 0;
+        public bool TaskCompleted { get; set; } = false;
         public bool IsValid() {
             if (string.IsNullOrEmpty(NameTask))
             {

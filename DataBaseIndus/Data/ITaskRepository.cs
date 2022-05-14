@@ -1,5 +1,5 @@
-﻿using DataBaseIndus.Models;
-namespace DataBaseIndus.Data
+﻿using ToDoList.Models;
+namespace ToDoList.Data
 {
     public interface ITaskRepository
     {

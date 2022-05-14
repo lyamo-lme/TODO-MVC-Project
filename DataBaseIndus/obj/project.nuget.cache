@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "QoLlxtvJkFBWa76Ubm6HhjE3LNdFQ0ln8k8mlhYmHh3y8EgfBofGskfTaVSM7ZeR08F9Y2VR52nqOGLl2nKi+Q==",
+  "dgSpecHash": "2iUD3lDxf6sKQHBVkZQPYYpLPLPBfxKtCu+CiX1qN2FzwMZZW8Iuj5kspVpkKl1CkVTIK6lSkdaEhh47Gj8INQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\DataBaseIndus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\макс\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\макс\\.nuget\\packages\\grpc.core\\2.45.0\\grpc.core.2.45.0.nupkg.sha512",
+    "C:\\Users\\макс\\.nuget\\packages\\grpc.core.api\\2.45.0\\grpc.core.api.2.45.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
@@ -47,6 +49,7 @@
     "C:\\Users\\макс\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\system.identitymodel.tokens.jwt\\6.8.0\\system.identitymodel.tokens.jwt.6.8.0.nupkg.sha512",
+    "C:\\Users\\макс\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "C:\\Users\\макс\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",

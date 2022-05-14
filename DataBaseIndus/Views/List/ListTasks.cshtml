@@ -1,18 +1,18 @@
 ﻿@model ViewModel
 <h1>List view</h1>
-<form asp-action="CreateTask" method="post">
+<form  asp-action="CreateTask"   method="post">
     <div asp-validation-summary="All"></div>
     <div>
-        <lavel asp-for="AddTask.NameTask">Имя задания</lavel>
-        <input asp-for="AddTask.NameTask" />
+        <lavel for="NameTask">Имя задания</lavel>
+        <input name="NameTask" />
     </div>
     <div>
         <label>Дата выполнения</label>
-        <input asp-for="AddTask.DeadLine" />
+        <input  type="datetime-local" name="DeadLine" />
     </div>
     <div>
         <label>Категория</label>
-        <select asp-for="AddTask.CategoryId">
+        <select name="CategoryId">
             @foreach (var category in Model.Categories)
             {
                 <option required value="@category.IdCategory"> @category.NameCategory</option>
@@ -22,8 +22,7 @@
     <button type="submit">Создать</button>
 </form>
 <br>
-<a asp-action="GetDoneOrUnDoneTask" asp-route-mode="1">Undone Tasks</a>|<a asp-action="GetDoneOrUnDoneTask" asp-route-mode="2">Done Tasks</a>
-<table>
+<table >
     <tr>
         <th>NameTask</th>
         <th>DeadLine</th>
@@ -33,20 +32,44 @@
     </tr>
     @foreach (var task in @Model.Tasks)
     {
+        @if(task.TaskCompleted){
         <tr>
             <td>@task.NameTask</td>
             <td>@task.DeadLine</td>
-            @if (@task.TaskCompleted)
-            {
-                <td>Undone</td>
-            }
-            else
-            {
-                <td>Done</td>
-            }
+            
+           <td>    
+              @Html.Encode("Done");
+            <a asp-action="ChangeStatusDone" asp-route-message="@ViewContext.HttpContext.Request.Path" asp-route-id="@task.Id"><button>Change</button></a>
+             </td>
             <td>@task.NameCategory</td>
             <td><a asp-action="EditTask" asp-route-id="@task.Id">Edit</a>|<a asp-action="DeleteTask" asp-route-id="@task.Id">Delete</a></td>
-            <td><a asp-action="ChangeStatusDone" asp-route-message="@ViewContext.HttpContext.Request.Path" asp-route-id="@task.Id">Change status done</a></td>
-        </tr>
+           </tr>
+           }
+    }
+</table>
+<table>
+    
+    <tr>
+        <th>NameTask</th>
+        <th>DeadLine</th>
+        <th>DoneTask</th>
+        <th>NameCategory</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var task in @Model.Tasks)
+    {
+        @if(!task.TaskCompleted){
+        <tr>
+            <td>@task.NameTask</td>
+            <td>@task.DeadLine</td>
+            
+           <td>
+              @Html.Encode("Undone");
+            <a asp-action="ChangeStatusDone" asp-route-message="@ViewContext.HttpContext.Request.Path" asp-route-id="@task.Id"><button>Change</button></a>
+             </td>
+            <td>@task.NameCategory</td>
+            <td><a asp-action="EditTask" asp-route-id="@task.Id">Edit</a>|<a asp-action="DeleteTask" asp-route-id="@task.Id">Delete</a></td>
+           </tr>
+           }
     }
 </table>

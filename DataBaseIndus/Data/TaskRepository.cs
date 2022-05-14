@@ -1,9 +1,9 @@
 ﻿using Dapper;
-using DataBaseIndus.Models;
+using ToDoList.Models;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace DataBaseIndus.Data
+namespace ToDoList.Data
 {
     public class TaskRepository : ITaskRepository
     {

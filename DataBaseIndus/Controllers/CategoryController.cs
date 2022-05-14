@@ -1,74 +1,85 @@
-﻿using DataBaseIndus.Data;
-using DataBaseIndus.Models;
+﻿using AutoMapper;
+using ToDoList.Data;
+using ToDoList.Models;
 using Microsoft.AspNetCore.Mvc;
+using DataBaseIndus.Data;
 
-namespace DataBaseIndus.Controllers
+namespace ToDoList.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly IConfiguration _configuration;
-        public ICategoryRepository CategoryConnection { get; set; }
-        public ITaskRepository TaskConnection { get; set; }
-        public CategoryController(IConfiguration configuration, ITaskRepository taskRepository, ICategoryRepository categoryRepository)
+        private readonly IConfiguration configuration;
+        public ICategoryRepository categoryRepository { get; set; }
+        public ITaskRepository taskRepository { get; set; }
+        IMapper Mapper { get; set; }
+
+        public CategoryController(IMapper mapper, IConfiguration configuration, IServiceProvider serviceProvider)
         {
-            _configuration = configuration;
-            TaskConnection = taskRepository;
-            CategoryConnection = categoryRepository;
+            CurrentRepository.Initialization(serviceProvider, CurrentRepository.currentSource);
+            this.configuration = configuration;
+            categoryRepository = CurrentRepository.categoryRepository;
+            taskRepository = CurrentRepository.taskRepository;
+            Mapper = mapper;
         }
         public IActionResult Index()
         {
-            List<Category> Categories = CategoryConnection.GetCategories();
+            List<Category> Categories = categoryRepository.GetCategories();
+            //Mapper.Map<List<CategoryViewModel>>(CategoryConnection.GetCategories());
             return View("ListCategories", Categories);
         }
         [HttpGet]
-        public IActionResult AddCategory() {
+        public IActionResult AddCategory()
+        {
             return View("AddCategoryForm");
         }
         [HttpPost]
-        public IActionResult AddCategory(Category model) {
+        public IActionResult AddCategory(AddCategory model)
+        {
             if (ModelState.IsValid)
             {
-                CategoryConnection.AddCategory(model);
+                categoryRepository.AddCategory(model);
                 return RedirectToAction("Index");
             }
             return View("AddCategoryForm");
 
         }
         [HttpGet]
-        public IActionResult EditCategory(int id) {
-            Category model = CategoryConnection.GetCategoryTasks(id);
-            return View("EditCategoryForm", model);
+        public IActionResult EditCategory(int id)
+        {
+            return View("EditCategoryForm", categoryRepository.GetCategoryById(id) /*Mapper.Map<CategoryViewModel>(CategoryConnection.GetCategoryById(id))*/);
         }
         [HttpPost]
-        public IActionResult EditCategory(Category model) {
+        public IActionResult EditCategory(Category model)
+        {
             if (ModelState.IsValid)
             {
-                CategoryConnection.EditCategory(model);
+                categoryRepository.EditCategory(model);
                 return RedirectToAction("Index");
             }
             else
             {
-                return View("EditCategoryForm",model);
+                return View("EditCategoryForm", model);
             }
         }
         public IActionResult CategoryWithTasks(int id = 0)
         {
             if (id != 0)
             {
-                Category category = CategoryConnection.GetCategoryTasks(id);
+                Category category = categoryRepository.GetCategoryTasks(id);
                 return View("CategoryWithTasks", category);
             }
             return RedirectToAction("Index");
         }
-        public IActionResult DeleteCategory(int id=0) {
+        public IActionResult DeleteCategory(int id = 0)
+        {
             try
             {
                 if (id != 0)
                 {
-                    CategoryConnection.DeleteCategory(id);
+                    categoryRepository.DeleteCategory(id);
                 }
             }
-            catch(Exception e)
+            catch
             {
                 return View("Views/Error.cshtml", new Error("Не можна видалити поки є завдання повязанні з цією категорією"));
             }

@@ -1,29 +1,34 @@
 ﻿@model ViewModel
 @{
 }
-<form asp-action="EditTask"   method="post">
+<form asp-action="EditTask" method="post">
+    <div asp-validation-summary="All"></div>
     <div>
-        <label> name task<label />
-            <input asp-for="EditModel.NameTask" value="@Model.EditModel.NameTask"></input>
-    </div>
-    <input hidden asp-for="EditModel.Id" value="@Model.EditModel.Id">
+        <label>
+            Name Task
+        </label>
+        <input name="NameTask" value="@Model.EditModel.NameTask"></input>
 
+    </div>
+    <input hidden name="Id" value="@Model.EditModel.Id">
     <div>
         <label>Dead Line</label>
-        <input asp-for="EditModel.DeadLine" value="@Model.EditModel.DeadLine">
+        <input type="datetime-local" name="DeadLine" value="@Model.EditModel.DeadLine">
     </div>
     <div>
         <label>Task Completed</label>
-        <select asp-for="EditModel.TaskCompleted">
+        <select name="TaskCompleted">
             <option value="true">Done </option>
             <option value="false">Not Done</option>
         </select>
     </div>
     <div>
-        <select asp-for="EditModel.CategoryId" value="@Model.EditModel.CategoryId">
-             @foreach(var category in Model.Categories){
-        <option required value="@category.IdCategory"> @category.NameCategory</option>      
-        }
+        <select name="CategoryId" value="@Model.EditModel.CategoryId">
+            @foreach (var category in Model.Categories)
+
+            {
+                <option required value="@category.IdCategory"> @category.NameCategory</option>
+            }
         </select>
     </div>
     <button type="submit">Change task</button>

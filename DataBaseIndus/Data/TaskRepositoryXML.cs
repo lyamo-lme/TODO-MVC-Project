@@ -1,5 +1,5 @@
-﻿using ToDoList.Models;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
+using DataBaseIndus.Models.DbModel;
 
 namespace ToDoList.Data
 {
@@ -11,13 +11,8 @@ namespace ToDoList.Data
         public TaskRepositoryXML()
         {
         }
-        public TaskRepositoryXML(string taskfile, string categoryfile)
-        {
-            TasksDirectoryPath = "@/XmlStorage/" + taskfile;
-            CategoriesDirectoryPath = @"/XmlStorage/" + categoryfile;
-        }
 
-        public void AddTask(AddTask model)
+        public Tasks CreateTask(Tasks model)
         {
             XDocument TasksXML = XDocument.Load(TasksDirectoryPath);
             XElement element = TasksXML.Descendants("tasks").Descendants("task").Last();
@@ -31,6 +26,7 @@ namespace ToDoList.Data
 
             TasksXML.Element("tasks").Add(AddModel);
             TasksXML.Save(TasksDirectoryPath);
+            return GetTaskId(Id);
         }
         public List<Tasks> GetTasks(int? mode = 0)
         {
@@ -52,7 +48,6 @@ namespace ToDoList.Data
                                                NameCategory = categories.Element("namecategory").Value
                                            };
             List<Tasks> model = ListTasks.ToList();
-            /* ORDER BY case when DeadLine is null then 1 else 0 end, DeadLine asc*/
             return model;
         }
         public Tasks GetTaskId(int? id)
@@ -75,27 +70,33 @@ namespace ToDoList.Data
             Tasks model = ListTasks.First();
             return model;
         }
-        public int UpdateTask(EditTask model)
+        public Tasks UpdateTask(Tasks model)
         {
             XDocument TasksXML = XDocument.Load(TasksDirectoryPath);
             XElement element = TasksXML.Descendants("tasks").Descendants("task").FirstOrDefault(x => (int)x.Element("id") == model.Id);
             element.SetElementValue($"{nameof(model.NameTask).ToLower()}", model.NameTask);
             int TaskCompleted = 0;
             if (model.TaskCompleted) { TaskCompleted = 1; }
-            element.SetElementValue($"{nameof(model.TaskCompleted).ToLower()}", model.TaskCompleted);
+            element.SetElementValue($"{nameof(model.TaskCompleted).ToLower()}", TaskCompleted);
             element.SetElementValue($"{nameof(model.CategoryId).ToLower()}", model.CategoryId);
             element.SetElementValue($"{nameof(model.DeadLine).ToLower()}", model.DeadLine.ToString());
             TasksXML.Save(TasksDirectoryPath);
-            return 1;
+            return GetTaskId(model.Id);
         }
-        public void DeleteTask(int? id)
+        public int DeleteTask(int? id)
         {
+            try { 
             XDocument TasksXML = XDocument.Load(TasksDirectoryPath);
             var element = (from x in TasksXML.Descendants("tasks").Descendants("task")
                            where (int)(x.Element("id")) == id
                            select x);
             element.Remove();
             TasksXML.Save(TasksDirectoryPath);
+                return 1;
+            }
+            catch {
+                return 0; 
+            }
         }
         public DateTime? ParseDateTime(string time)
         {

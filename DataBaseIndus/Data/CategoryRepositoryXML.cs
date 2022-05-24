@@ -1,5 +1,6 @@
 ﻿using ToDoList.Models;
 using System.Xml.Linq;
+using DataBaseIndus.Models.DbModel;
 
 namespace ToDoList.Data
 {
@@ -11,17 +12,19 @@ namespace ToDoList.Data
         {
         }
 
-        public void AddCategory(AddCategory model)
+        public Category CreateCategory(Category model)
         {
+
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").LastOrDefault();
             int Id = (int)element.Element("idcategory");
             Id++;
-            XElement AddModel = new XElement("category", new XElement("idcategory", $"{Id}"),
+            XElement CreateModel = new XElement("category", new XElement("idcategory", $"{Id}"),
                 new XElement($"{nameof(model.NameCategory).ToLower()}", $"{model.NameCategory}"));
 
-            CategoriesXML.Element("categories").Add(AddModel);
+            CategoriesXML.Element("categories").Add(CreateModel);
             CategoriesXML.Save(DirectoryPathCategories);
+            return GetCategoryById(Id);
         }
         public Category GetCategoryTasks(int id)
         {
@@ -36,15 +39,15 @@ namespace ToDoList.Data
                 IdCategory = (int)element.Element("idcategory"),
                 NameCategory = element.Element($"{nameof(model.NameCategory).ToLower()}").Value,
                 tasks = (from tasks in TasksXML.Descendants("task")
-                        where (int)tasks.Element("categoryid") == id
-                        select new Tasks
-                        {
-                            Id = ((int)tasks.Element("id")),
-                            NameTask = tasks.Element("nametask").Value,
-                            DeadLine = ParseDateTime((string)tasks.Element("deadline")),
-                            CategoryId = (int)tasks.Element("categoryid"),
-                            TaskCompleted = (bool)tasks.Element("taskcompleted")
-                        }).ToList()
+                         where (int)tasks.Element("categoryid") == id
+                         select new Tasks
+                         {
+                             Id = (int)tasks.Element("id"),
+                             NameTask = tasks.Element("nametask").Value,
+                             DeadLine = ParseDateTime((string)tasks.Element("deadline")),
+                             CategoryId = (int)tasks.Element("categoryid"),
+                             TaskCompleted = (bool)tasks.Element("taskcompleted")
+                         }).ToList()
             };
 
 
@@ -64,19 +67,28 @@ namespace ToDoList.Data
 
             return model;
         }
-        public void DeleteCategory(int id)
+        public int DeleteCategory(int id)
         {
-            XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
-            XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id);
-            element.Remove();
-            CategoriesXML.Save(DirectoryPathCategories);
+            try
+            {
+                XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
+                XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id);
+                element.Remove();
+                CategoriesXML.Save(DirectoryPathCategories);
+                return 1;
+            }
+            catch
+            {
+                return 0;
+            }
         }
-        public void EditCategory(Category model)
+        public Category EditCategory(Category model)
         {
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == model.IdCategory);
             element.SetElementValue("namecategory", model.NameCategory);
             CategoriesXML.Save(DirectoryPathCategories);
+            return GetCategoryTasks(model.IdCategory);
         }
         public List<Category> GetCategories()
         {
@@ -97,7 +109,7 @@ namespace ToDoList.Data
             if (DateTime.TryParse(time, out dateTime))
             {
                 return dateTime;
-            }
+            } 
             return null;
         }
     }

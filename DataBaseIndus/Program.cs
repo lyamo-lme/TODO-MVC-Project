@@ -1,6 +1,12 @@
-using DataBaseIndus.Data;
+using DataBaseIndus.GraphQL;
+using GraphQL.MicrosoftDI;
+using GraphQL.Server;
+using GraphQL.Types;
 using ToDoList.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
 builder.Services.AddTransient<CategoryRepositoryXML>();
 builder.Services.AddTransient<TaskRepositoryXML>();
 builder.Services.AddTransient<TaskRepository>();
@@ -8,7 +14,14 @@ builder.Services.AddTransient<CategoryRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-// Add services to the container.
+builder.Services.AddSingleton<DataSchema>();
+builder.Services
+    .AddGraphQL(options =>
+    {
+        options.EnableMetrics = true;})
+    .AddSystemTextJson()
+    .AddGraphTypes(typeof(DataSchema));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -17,7 +30,6 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -27,6 +39,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseGraphQL<DataSchema>();
+app.UseGraphQLAltair();
 
 app.MapControllerRoute(
     name: "default",

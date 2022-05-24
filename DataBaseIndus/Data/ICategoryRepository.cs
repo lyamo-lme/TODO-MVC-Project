@@ -1,14 +1,15 @@
-﻿using ToDoList.Models;
+﻿using DataBaseIndus.Models.DbModel;
+using ToDoList.Models;
 
 namespace ToDoList.Data
 {
     public interface ICategoryRepository
     {
-        void AddCategory(AddCategory model);
+        Category CreateCategory(Category model);
         List<Category> GetCategories();
         Category GetCategoryTasks(int id);
         Category GetCategoryById(int id);
-        void EditCategory(Category model) ;
-        void DeleteCategory(int id);
+        Category EditCategory(Category model) ;
+        int DeleteCategory(int id);
     }
 }

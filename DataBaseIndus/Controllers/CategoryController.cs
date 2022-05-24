@@ -3,6 +3,7 @@ using ToDoList.Data;
 using ToDoList.Models;
 using Microsoft.AspNetCore.Mvc;
 using DataBaseIndus.Data;
+using DataBaseIndus.Models.DbModel;
 
 namespace ToDoList.Controllers
 {
@@ -33,11 +34,11 @@ namespace ToDoList.Controllers
             return View("AddCategoryForm");
         }
         [HttpPost]
-        public IActionResult AddCategory(AddCategory model)
+        public IActionResult AddCategory(CreateCategory model)
         {
             if (ModelState.IsValid)
             {
-                categoryRepository.AddCategory(model);
+                categoryRepository.CreateCategory(Mapper.Map<Category>(model));
                 return RedirectToAction("Index");
             }
             return View("AddCategoryForm");
@@ -81,7 +82,7 @@ namespace ToDoList.Controllers
             }
             catch
             {
-                return View("Views/Error.cshtml", new Error("Не можна видалити поки є завдання повязанні з цією категорією"));
+                return View("Views/Error.cshtml", new Models.Error("Не можна видалити поки є завдання повязанні з цією категорією"));
             }
             return RedirectToAction("Index");
         }

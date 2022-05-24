@@ -19,6 +19,7 @@ namespace DataBaseIndus.Data
                     categoryRepository = service.GetService<CategoryRepositoryXML>();
                     taskRepository = service.GetService<TaskRepositoryXML>();
                     break;
+                default:
                 case typeSource.Db:
                     categoryRepository = service.GetService<CategoryRepository>();
                     taskRepository = service.GetService<TaskRepository>();

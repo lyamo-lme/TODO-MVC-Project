@@ -1,11 +1,11 @@
-﻿@model Category
+﻿
 @{
 }
 <form asp-action="AddCategory" method="post">
     <div asp-validation-summary="All"></div>
     <div>
-    <lavel asp-for="NameCategory">Имя категории</lavel>
-    <input asp-for="NameCategory"/>
+    <lavel for="NameCategory">Имя категории</lavel>
+    <input name="NameCategory"/>
     </div>
     <button type="submit">Создать</button>
  </form>

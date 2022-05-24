@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoList.Data;
-using ToDoList.Models;
+
 using AutoMapper;
 using DataBaseIndus.Enums;
+
+using DataBaseIndus.Models.DbModel;
+using ToDoList.Data;
 using DataBaseIndus.Data;
+using ToDoList.Models;
 
 namespace ToDoList.Controllers
 {
@@ -36,18 +39,17 @@ namespace ToDoList.Controllers
             ViewModel model = new ViewModel
             {
                 Tasks = taskRepository.GetTasks(),
-                /*Categories = Mapper.Map<List<CategoryViewModel>>(CategoryConnection.GetCategories())*/
-                Categories = categoryRepository.GetCategories()
+                categoryViewModels = Mapper.Map<List<CategoryViewModel>>(categoryRepository.GetCategories())
             };
             return View("ListTasks",model);
         }
         [HttpPost]
-        public IActionResult CreateTask(AddTask model)
+        public IActionResult CreateTask(CreateTask model)
         {
 
             if (ModelState.IsValid)
             {
-                CurrentRepository.taskRepository.AddTask(model);
+                taskRepository.CreateTask(Mapper.Map<Tasks>(model));
                 return RedirectToAction("Index");
             }
             else
@@ -56,7 +58,6 @@ namespace ToDoList.Controllers
                 {
                     Tasks = taskRepository.GetTasks(),
                     Categories = categoryRepository.GetCategories()
-                    /*Categories = Mapper.Map<List<CategoryViewModel>>(CategoryConnection.GetCategories())*/
                 };
                 return View("ListTasks", Model);
             }
@@ -66,7 +67,6 @@ namespace ToDoList.Controllers
         {
             ViewModel model = new ViewModel();
             model.Categories = categoryRepository.GetCategories();
-            /*Mapper.Map<List<CategoryViewModel>>(CategoryConnection.GetCategories());*/
             model.EditModel = Mapper.Map<EditTask>(taskRepository.GetTaskId(id));
             return View("EditTaskForm", model);
         }
@@ -75,7 +75,7 @@ namespace ToDoList.Controllers
         {
             if (ModelState.IsValid)
             {
-                taskRepository.UpdateTask(model);
+                taskRepository.UpdateTask(Mapper.Map<Tasks>(model));
             }
             return RedirectToAction("Index");
         }
@@ -96,7 +96,7 @@ namespace ToDoList.Controllers
             {
                 Tasks model = taskRepository.GetTaskId(id);
                 model.TaskCompleted = !model.TaskCompleted;
-                taskRepository.UpdateTask(Mapper.Map<EditTask>(model));
+                taskRepository.UpdateTask(model);
             }
             return Redirect(message);
         }

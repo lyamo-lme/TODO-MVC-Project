@@ -1,7 +1,7 @@
 ﻿using Dapper;
-using ToDoList.Models;
 using System.Data;
 using System.Data.SqlClient;
+using DataBaseIndus.Models.DbModel;
 
 namespace ToDoList.Data
 {
@@ -20,23 +20,25 @@ namespace ToDoList.Data
             get => new SqlConnection(ConnectionString);
 
         }
-        public void AddTask(AddTask model)
+        public Tasks? CreateTask(Tasks model)
         {
 
             string query = @"
                  INSERT INTO TASKS (NameTask, DeadLine, CategoryId,TaskCompleted)
-                        VALUES (@NameTask,@DeadLine,@CategoryID,@TaskCompleted)";
+                        VALUES (@NameTask,@DeadLine,@CategoryID,@TaskCompleted)
+                       SELECT @@IDENTITY";
             try
             {
                 using (IDbConnection connection = Connection)
                 {
                     connection.Open();
-                    connection.Query(query, model);
+                    int Id = connection.Query<int>(query, model).LastOrDefault();
                     connection.Close();
-
+                    return GetTaskId(Id);
                 }
             }
             catch { }
+            return null;
         }
         public List<Tasks> GetTasks(int? mode=0)
         {
@@ -51,8 +53,6 @@ namespace ToDoList.Data
             using (IDbConnection connection = Connection)
             {
                 connection.Open();
-                /* List<Tasks> tasks = connection.Query<Tasks, Category, Tasks>(query, (a, b) => { a.category = b; return a; }, splitOn: "IdCategory").ToList();
-             */
                 List<Tasks> tasks = connection.Query<Tasks>(query).ToList();
 
                 connection.Close();
@@ -63,15 +63,15 @@ namespace ToDoList.Data
         {
             using (IDbConnection connection = Connection)
             {
-                Tasks model;
+                
                 string sql = "Select * From Tasks Where Id=@id";
                 connection.Open();
-                model = connection.Query<Tasks>(sql,new { id }).FirstOrDefault();
+                Tasks model = connection.Query<Tasks>(sql,new { id }).FirstOrDefault();
                 connection.Close();
                 return model;
             }
         }
-        public int  UpdateTask(EditTask model)
+        public Tasks  UpdateTask(Tasks model)
         {
             using (IDbConnection connection = Connection)
             {
@@ -79,16 +79,17 @@ namespace ToDoList.Data
                 connection.Open();
                 int i=connection.Execute(sql, model);
                 connection.Close();
-                return i;
+                return GetTaskId(model.Id);
             }
 
         }
-        public void DeleteTask(int? id) {
+        public int DeleteTask(int? id) {
             using (IDbConnection connection = Connection) {
                 string sql = "Delete From Tasks Where Id=@Id";
                 connection.Open();
-                connection.Query(sql, new { id });
+                int result=connection.Execute(sql, new { id });
                 connection.Close();
+                return result;
             }
         }
     }

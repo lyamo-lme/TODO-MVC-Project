@@ -1,12 +1,13 @@
-﻿using ToDoList.Models;
+﻿using DataBaseIndus.Models.DbModel;
+
 namespace ToDoList.Data
 {
     public interface ITaskRepository
     {
-        void AddTask(AddTask tasks);
+        Tasks? CreateTask(Tasks tasks);
         Tasks GetTaskId(int? id);
-        int UpdateTask(EditTask model);
-        void DeleteTask(int? id);
+        Tasks UpdateTask(Tasks model);
+        int DeleteTask(int? id);
         
         List<Tasks> GetTasks(int? mode=0);
     }

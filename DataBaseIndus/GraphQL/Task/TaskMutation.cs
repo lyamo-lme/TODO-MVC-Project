@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataBaseIndus.Data;
+using DataBaseIndus.Enums;
 using DataBaseIndus.GraphQL.Task.Models;
 using DataBaseIndus.GraphQL.TaskQL.Models;
 using DataBaseIndus.Models.DbModel;
@@ -46,6 +47,27 @@ namespace DataBaseIndus.GraphQL.Task
                     Tasks model = taskRepository.GetTaskId(Id);
                     int result = taskRepository.DeleteTask(Id);
                     return model;
+                });
+
+
+            Field<StringGraphType, string>()
+                .Name("ChangeRepositoryType")
+                .Argument<StringGraphType, string>("TypeSource", "type of source")
+                .Resolve(context =>
+                {
+                    typeSource typeSource=typeSource.Db;
+                    string typeSourceString = context.GetArgument<string>("TypeSource");
+                    if ( typeSourceString== "XML") {
+                        typeSource = typeSource.XML;
+                        typeSourceString = "XML";
+                    }
+                    if (typeSourceString == "Db") {
+                        typeSource = typeSource.Db;
+                        typeSourceString = "Db";
+                    }
+                    CurrentRepository.Initialization(service, typeSource);
+                    return typeSourceString;
+                    []
                 });
             
         }

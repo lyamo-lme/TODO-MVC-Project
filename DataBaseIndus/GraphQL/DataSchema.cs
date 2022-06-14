@@ -1,8 +1,8 @@
-﻿using DataBaseIndus.GraphQL.Task;
-using DataBaseIndus.GraphQL.TaskQL.Models;
+﻿using ToDoList.GraphQL.Task;
+using ToDoList.GraphQL.TaskQL.Models;
 using GraphQL.Types;
 
-namespace DataBaseIndus.GraphQL
+namespace ToDoList.GraphQL
 {
     public class DataSchema:Schema
     {

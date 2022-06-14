@@ -6,71 +6,71 @@ build_property.ProjectTypeGuids =
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
-build_property.RootNamespace = TodoList
-build_property.RootNamespace = TodoList
-build_property.ProjectDir = C:\Users\макс\source\repos\DataBaseIndus\DataBaseIndus\
+build_property.RootNamespace = ToDoList
+build_property.RootNamespace = ToDoList
+build_property.ProjectDir = C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\макс\source\repos\DataBaseIndus\DataBaseIndus
+build_property.MSBuildProjectDirectory = C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Category/AddCategoryForm.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Category/AddCategoryForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQWRkQ2F0ZWdvcnlGb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Category/CategoryWithTasks.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Category/CategoryWithTasks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcQ2F0ZWdvcnlXaXRoVGFza3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Category/EditCategoryForm.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Category/EditCategoryForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcRWRpdENhdGVnb3J5Rm9ybS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Category/ListCategories.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Category/ListCategories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcTGlzdENhdGVnb3JpZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Error.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Home/Index.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Home/Privacy.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/AddCategory.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxBZGRDYXRlZ29yeS5jc2h0bWw=
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/List/DeleteTask.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxEZWxldGVUYXNrLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/EditTaskForm.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/List/EditTaskForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxFZGl0VGFza0Zvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/List/ListTasks.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/List/ListTasks.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGlzdFxMaXN0VGFza3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Shared/Error.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/_ViewImports.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/_ViewStart.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/макс/source/repos/DataBaseIndus/DataBaseIndus/Views/Shared/_Layout.cshtml]
+[C:/Users/Maks/source/repos/TODO-MVC-Project/DataBaseIndus/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-dflwqwkrub
+build_metadata.AdditionalFiles.CssScope = b-dt7ithozdg

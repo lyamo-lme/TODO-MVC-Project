@@ -1,6 +1,6 @@
 ﻿using ToDoList.Models;
 using System.Xml.Linq;
-using DataBaseIndus.Models.DbModel;
+using ToDoList.Models.DbModel;
 
 namespace ToDoList.Data
 {
@@ -12,12 +12,12 @@ namespace ToDoList.Data
         {
         }
 
-        public Category CreateCategory(Category model)
+        public  Category CreateCategory(Category model)
         {
 
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").LastOrDefault();
-            int Id = (int)element.Element("idcategory");
+            int Id =  (int)element.Element("idcategory");
             Id++;
             XElement CreateModel = new XElement("category", new XElement("idcategory", $"{Id}"),
                 new XElement($"{nameof(model.NameCategory).ToLower()}", $"{model.NameCategory}"));
@@ -40,10 +40,10 @@ namespace ToDoList.Data
                 NameCategory = element.Element($"{nameof(model.NameCategory).ToLower()}").Value,
                 tasks = (from tasks in TasksXML.Descendants("task")
                          where (int)tasks.Element("categoryid") == id
-                         select new Tasks
+                         select new TodoModel
                          {
                              Id = (int)tasks.Element("id"),
-                             NameTask = tasks.Element("nametask").Value,
+                             NameTodo = tasks.Element("nametask").Value,
                              DeadLine = ParseDateTime((string)tasks.Element("deadline")),
                              CategoryId = (int)tasks.Element("categoryid"),
                              TaskCompleted = (bool)tasks.Element("taskcompleted")

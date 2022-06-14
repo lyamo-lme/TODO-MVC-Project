@@ -1,7 +1,7 @@
-﻿using DataBaseIndus.Models.DbModel;
+﻿using ToDoList.Models.DbModel;
 using GraphQL.Types;
 
-namespace DataBaseIndus.GraphQL.Categories.Models
+namespace ToDoList.GraphQL.Categories.Models
 {
     public class EditCategoryType:InputObjectGraphType<Category>
     {

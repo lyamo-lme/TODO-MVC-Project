@@ -2,8 +2,7 @@
 using ToDoList.Data;
 using ToDoList.Models;
 using Microsoft.AspNetCore.Mvc;
-using DataBaseIndus.Data;
-using DataBaseIndus.Models.DbModel;
+using ToDoList.Models.DbModel;
 
 namespace ToDoList.Controllers
 {
@@ -11,12 +10,12 @@ namespace ToDoList.Controllers
     {
         private readonly IConfiguration configuration;
         public ICategoryRepository categoryRepository { get; set; }
-        public ITaskRepository taskRepository { get; set; }
+        public ITodoRepository taskRepository { get; set; }
         IMapper Mapper { get; set; }
 
         public CategoryController(IMapper mapper, IConfiguration configuration, IServiceProvider serviceProvider)
         {
-            CurrentRepository.Initialization(serviceProvider, CurrentRepository.currentSource);
+            CurrentRepository.ChangeRepository(serviceProvider, CurrentRepository.currentSource);
             this.configuration = configuration;
             categoryRepository = CurrentRepository.categoryRepository;
             taskRepository = CurrentRepository.taskRepository;
@@ -82,7 +81,7 @@ namespace ToDoList.Controllers
             }
             catch
             {
-                return View("Views/Error.cshtml", new Models.Error("Не можна видалити поки є завдання повязанні з цією категорією"));
+                return View("Views/Error.cshtml", new { error= "Не можна видалити поки є завдання повязанні з цією категорією"});
             }
             return RedirectToAction("Index");
         }

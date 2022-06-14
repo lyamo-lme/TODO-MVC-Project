@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\TodoList.csproj": {}
+    "C:\\Users\\Maks\\source\\repos\\TODO-MVC-Project\\DataBaseIndus\\ToDoList.csproj": {}
   },
   "projects": {
-    "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\TodoList.csproj": {
+    "C:\\Users\\Maks\\source\\repos\\TODO-MVC-Project\\DataBaseIndus\\ToDoList.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\TodoList.csproj",
-        "projectName": "TodoList",
-        "projectPath": "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\TodoList.csproj",
-        "packagesPath": "C:\\Users\\макс\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\макс\\source\\repos\\DataBaseIndus\\DataBaseIndus\\obj\\",
+        "projectUniqueName": "C:\\Users\\Maks\\source\\repos\\TODO-MVC-Project\\DataBaseIndus\\ToDoList.csproj",
+        "projectName": "ToDoList",
+        "projectPath": "C:\\Users\\Maks\\source\\repos\\TODO-MVC-Project\\DataBaseIndus\\ToDoList.csproj",
+        "packagesPath": "C:\\Users\\Maks\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Maks\\source\\repos\\TODO-MVC-Project\\DataBaseIndus\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\макс\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Maks\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,27 +44,53 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[11.0.1, )"
+            },
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
             "Dapper": {
               "target": "Package",
               "version": "[2.0.123, )"
             },
-            "Microsoft.EntityFrameworkCore": {
+            "GraphQL": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[4.7.1, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "GraphQL.MicrosoftDI": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[4.7.1, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "GraphQL.Server.Authorization.AspNetCore": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[5.2.0, )"
+            },
+            "GraphQL.Server.Transports.AspNetCore": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "GraphQL.Server.Transports.AspNetCore.SystemTextJson": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "GraphQL.Server.Ui.Altair": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            },
+            "Grpc.Core": {
+              "target": "Package",
+              "version": "[2.46.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -89,7 +115,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

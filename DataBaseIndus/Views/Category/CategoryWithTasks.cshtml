@@ -1,4 +1,4 @@
-﻿@using DataBaseIndus.Models.DbModel
+﻿@using ToDoList.Models.DbModel
 @model Category
 @{
 }
@@ -13,7 +13,7 @@
     @foreach  (var task in @Model.tasks)
     {
         <tr>
-            <td>@task.NameTask</td>
+            <td>@task.NameTodo</td>
             <td>@task.DeadLine</td>
             @if  (@task.TaskCompleted)
             {

@@ -1,4 +1,4 @@
-using DataBaseIndus.GraphQL;
+using ToDoList.GraphQL;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
 using GraphQL.Types;
@@ -8,13 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddTransient<CategoryRepositoryXML>();
-builder.Services.AddTransient<TaskRepositoryXML>();
-builder.Services.AddTransient<TaskRepository>();
+builder.Services.AddTransient<TodoRepositoryXML>();
+builder.Services.AddTransient<TodoRepository>();
 builder.Services.AddTransient<CategoryRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSingleton<DataSchema>();
+
 builder.Services
     .AddGraphQL(options =>
     {

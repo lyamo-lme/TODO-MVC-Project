@@ -1,28 +1,28 @@
-﻿using DataBaseIndus.Enums;
+﻿using ToDoList.Enums;
 using ToDoList.Data;
 
-namespace DataBaseIndus.Data
+namespace ToDoList.Data
 {
     public static class CurrentRepository
     {
 
-        public static ICategoryRepository categoryRepository { get; set; }
-        public static ITaskRepository taskRepository { get; set; }
+        public static ICategoryRepository categoryRepository { get; private set; }
+        public static ITodoRepository taskRepository { get; private set; }
         public static typeSource currentSource { get; set; } = typeSource.Db;
-        public static IServiceProvider serviceProvider { get; set; }
-        public  static void Initialization(IServiceProvider service, typeSource typeSource)
+        private static IServiceProvider serviceProvider { get; set; }
+        public  static void ChangeRepository(IServiceProvider service, typeSource typeSource)
         {
             serviceProvider = service;
             switch (typeSource)
             {
                 case typeSource.XML:
                     categoryRepository = service.GetService<CategoryRepositoryXML>();
-                    taskRepository = service.GetService<TaskRepositoryXML>();
+                    taskRepository = service.GetService<TodoRepositoryXML>();
                     break;
                 default:
                 case typeSource.Db:
                     categoryRepository = service.GetService<CategoryRepository>();
-                    taskRepository = service.GetService<TaskRepository>();
+                    taskRepository = service.GetService<TodoRepository>();
                     break;
             }
         }

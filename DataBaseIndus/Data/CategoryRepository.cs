@@ -2,7 +2,7 @@
 using ToDoList.Models;
 using System.Data;
 using System.Data.SqlClient;
-using DataBaseIndus.Models.DbModel;
+using ToDoList.Models.DbModel;
 
 namespace ToDoList.Data
 {
@@ -29,8 +29,9 @@ namespace ToDoList.Data
                        Values(@NameCategory)
                        SELECT @@IDENTITY
                       ";
-                Connection.Open();
-                int Id = Connection.Query<int>(Query, model).LastOrDefault();
+                 Connection.Open();
+
+                int Id = Connection.Query<int>(Query,model).LastOrDefault();
                 Connection.Close();
                 return GetCategoryById(Id);
             }
@@ -43,7 +44,7 @@ namespace ToDoList.Data
                 connection.Open();
                 Category category = connection.Query<Category>(sql, new { id } ).FirstOrDefault();
                 sql = $"Select * from Tasks Where CategoryId={id} ORDER BY case when DeadLine is null then 1 else 0 end, DeadLine asc";
-                category.tasks = connection.Query<Tasks>(sql,category.tasks).ToList();
+                category.tasks = connection.Query<TodoModel>(sql,category.tasks).ToList();
                 connection.Close();
                 return category;
             }

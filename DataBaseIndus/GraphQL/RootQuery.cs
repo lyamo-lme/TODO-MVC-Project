@@ -1,14 +1,14 @@
-﻿using DataBaseIndus.GraphQL.Categories;
-using DataBaseIndus.GraphQL.Task;
+﻿using ToDoList.GraphQL.Categories;
+using ToDoList.GraphQL.Task;
 using GraphQL.Types;
 
-namespace DataBaseIndus.GraphQL
+namespace ToDoList.GraphQL
 {
     public class RootQuery:ObjectGraphType
     {
         public RootQuery()
         {
-            Field<TaskQuery>()
+            Field<TodoQuery>()
                 .Name("TasksQueries")
                 .Resolve(_ => new { });
 

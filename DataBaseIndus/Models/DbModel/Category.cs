@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DataBaseIndus.Models.DbModel
+namespace ToDoList.Models.DbModel
 {
     public class Category
     {
@@ -8,7 +8,7 @@ namespace DataBaseIndus.Models.DbModel
         public int IdCategory { get; set; }
         [Required(ErrorMessage = "Please enter category name")]
         public string NameCategory { get; set; }
-        public List<Tasks>? tasks { get; set; }
+        public List<TodoModel>? tasks { get; set; }
 
     }
 }

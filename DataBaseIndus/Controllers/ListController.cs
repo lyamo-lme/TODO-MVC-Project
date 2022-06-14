@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using AutoMapper;
-using DataBaseIndus.Enums;
-
-using DataBaseIndus.Models.DbModel;
+using ToDoList.Enums;
+using ToDoList.Models.DbModel;
 using ToDoList.Data;
-using DataBaseIndus.Data;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
@@ -15,11 +12,11 @@ namespace ToDoList.Controllers
         private readonly IConfiguration configuration;
         public ICategoryRepository categoryRepository { get; set; }
         public IMapper Mapper { get; set; }
-        public ITaskRepository taskRepository { get; set; }
+        public ITodoRepository taskRepository { get; set; }
         public ListController(IMapper mapper, IConfiguration configuration,IServiceProvider service)
         {
 
-            CurrentRepository.Initialization(service, CurrentRepository.currentSource);
+            CurrentRepository.ChangeRepository(service, CurrentRepository.currentSource);
             this.configuration = configuration;
             categoryRepository = CurrentRepository.categoryRepository;
             taskRepository = CurrentRepository.taskRepository;
@@ -44,44 +41,44 @@ namespace ToDoList.Controllers
             return View("ListTasks",model);
         }
         [HttpPost]
-        public IActionResult CreateTask(CreateTask model)
+        public IActionResult CreateTodo(CreateTodoModel model)
         {
 
-            if (ModelState.IsValid)
-            {
-                taskRepository.CreateTask(Mapper.Map<Tasks>(model));
+          /*  if (ModelState.IsValid)
+            {*/
+                taskRepository.CreateTask(Mapper.Map<TodoModel>(model));
                 return RedirectToAction("Index");
-            }
-            else
-            {
+           // }
+          /*  else
+            {*/
                 ViewModel Model = new ViewModel
                 {
                     Tasks = taskRepository.GetTasks(),
                     Categories = categoryRepository.GetCategories()
                 };
                 return View("ListTasks", Model);
-            }
+            //}
         }
         [HttpGet]
         public IActionResult EditTask(int id)
         {
             ViewModel model = new ViewModel();
             model.Categories = categoryRepository.GetCategories();
-            model.EditModel = Mapper.Map<EditTask>(taskRepository.GetTaskId(id));
+            model.EditModel = Mapper.Map<EditTodoModel>(taskRepository.GetTaskId(id));
             return View("EditTaskForm", model);
         }
         [HttpPost]
-        public IActionResult EditTask(EditTask model)
+        public IActionResult EditTask(EditTodoModel model)
         {
             if (ModelState.IsValid)
             {
-                taskRepository.UpdateTask(Mapper.Map<Tasks>(model));
+                taskRepository.UpdateTask(Mapper.Map<TodoModel>(model));
             }
             return RedirectToAction("Index");
         }
         public IActionResult DeleteTask(int? id)
         {
-            DeleteTaskViewModel model = Mapper.Map<DeleteTaskViewModel>(taskRepository.GetTaskId(id));
+            DeleteTodoViewModel model = Mapper.Map<DeleteTodoViewModel>(taskRepository.GetTaskId(id));
             return View("DeleteTask", model);
         }
         [HttpPost]
@@ -94,7 +91,7 @@ namespace ToDoList.Controllers
         {
             if (id != null)
             {
-                Tasks model = taskRepository.GetTaskId(id);
+                TodoModel model = taskRepository.GetTaskId(id);
                 model.TaskCompleted = !model.TaskCompleted;
                 taskRepository.UpdateTask(model);
             }

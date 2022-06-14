@@ -1,24 +1,23 @@
 ﻿using AutoMapper;
-using DataBaseIndus.Data;
-using DataBaseIndus.GraphQL.Categories.Models;
-using DataBaseIndus.Models.DbModel;
+using ToDoList.Data;
+using ToDoList.GraphQL.Categories.Models;
+using ToDoList.Models.DbModel;
 using GraphQL;
 using GraphQL.Types;
-using ToDoList.Data;
 using ToDoList.Models;
 
-namespace DataBaseIndus.GraphQL.Categories
+namespace ToDoList.GraphQL.Categories
 {
     public class CategoryMutation:ObjectGraphType
     {
         private ICategoryRepository categoryRepository { get; set; }
         public CategoryMutation(IServiceProvider serviceProvider, IMapper mapper) {
-            CurrentRepository.Initialization(serviceProvider, CurrentRepository.currentSource);
+            CurrentRepository.ChangeRepository(serviceProvider, CurrentRepository.currentSource);
             categoryRepository = CurrentRepository.categoryRepository;
 
             Field<CategoryType, Category>()
                   .Name("Create")
-                  .Argument<NonNullGraphType<CreateCategoryType>, CreateTask>("NewCategory", "New category arguments")
+                  .Argument<NonNullGraphType<CreateCategoryType>, CreateTodoModel>("NewCategory", "New category arguments")
                   .Resolve(context =>
                   {
 

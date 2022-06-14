@@ -1,14 +1,14 @@
-﻿using DataBaseIndus.GraphQL.Categories;
-using DataBaseIndus.GraphQL.Task;
+﻿using ToDoList.GraphQL.Categories;
+using ToDoList.GraphQL.Task;
 using GraphQL.Types;
 
-namespace DataBaseIndus.GraphQL
+namespace ToDoList.GraphQL
 {
     public class RootMutation : ObjectGraphType
     {
         public RootMutation()
         {
-            Field<TaskMutation>()
+            Field<TodoMutation>()
                     .Name("TaskMutation")
                     .Resolve(_ => new { });
 
@@ -16,7 +16,6 @@ namespace DataBaseIndus.GraphQL
                 .Name("CategoryMutation")
                 .Resolve(_ => new { });
 
-               
             
         }
     }

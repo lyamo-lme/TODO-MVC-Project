@@ -1,11 +1,10 @@
-﻿using DataBaseIndus.Data;
-using DataBaseIndus.GraphQL.Categories.Models;
-using DataBaseIndus.Models.DbModel;
+﻿using ToDoList.Data;
+using ToDoList.GraphQL.Categories.Models;
+using ToDoList.Models.DbModel;
 using GraphQL;
 using GraphQL.Types;
-using ToDoList.Data;
 
-namespace DataBaseIndus.GraphQL.Categories
+namespace ToDoList.GraphQL.Categories
 {
     public class CategoryQuery : ObjectGraphType
     {
@@ -13,7 +12,7 @@ namespace DataBaseIndus.GraphQL.Categories
         public CategoryQuery(IServiceProvider serviceProvider)
         {
 
-            CurrentRepository.Initialization(serviceProvider, CurrentRepository.currentSource);
+            CurrentRepository.ChangeRepository(serviceProvider, CurrentRepository.currentSource);
             categoryRepository = CurrentRepository.categoryRepository;
 
             Field<NonNullGraphType<ListGraphType<CategoryType>>, List<Category>>()

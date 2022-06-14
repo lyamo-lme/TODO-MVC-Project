@@ -1,7 +1,7 @@
 ﻿using GraphQL.Types;
 using ToDoList.Models;
 
-namespace DataBaseIndus.GraphQL.Categories.Models
+namespace ToDoList.GraphQL.Categories.Models
 {
     public class CreateCategoryType:InputObjectGraphType<CreateCategory>
     {

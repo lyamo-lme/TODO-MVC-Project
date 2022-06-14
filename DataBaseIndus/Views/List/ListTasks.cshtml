@@ -1,10 +1,10 @@
 ﻿@model ViewModel
 <h1>List view</h1>
-<form  asp-action="CreateTask"   method="post">
+<form  asp-action="CreateTodo"   method="post">
     <div asp-validation-summary="All"></div>
     <div>
-        <lavel for="NameTask">Имя задания</lavel>
-        <input name="NameTask" />
+        <lavel for="NameTodo">Имя задания</lavel>
+        <input name="NameTodo" />
     </div>
     <div>
         <label>Дата выполнения</label>
@@ -34,7 +34,7 @@
     {
         @if(task.TaskCompleted){
         <tr>
-            <td>@task.NameTask</td>
+            <td>@task.NameTodo</td>
             <td>@task.DeadLine</td>
             
            <td>    
@@ -60,7 +60,7 @@
     {
         @if(!task.TaskCompleted){
         <tr>
-            <td>@task.NameTask</td>
+            <td>@task.NameTodo</td>
             <td>@task.DeadLine</td>
             
            <td>

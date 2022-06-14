@@ -1,4 +1,4 @@
-﻿namespace DataBaseIndus.Enums
+﻿namespace ToDoList.Enums
 { 
         public enum typeSource {
         XML,

@@ -1,5 +1,4 @@
-﻿using DataBaseIndus.Models.DbModel;
-using ToDoList.Models;
+﻿using ToDoList.Models.DbModel;
 
 namespace ToDoList.Data
 {

@@ -6,26 +6,24 @@ import { useAppDispatch } from "../../store/hooks";
 import { updateCategory } from "../../store/Slice/category/categorySlice";
 import { fetchToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
-import { ICategoryType } from "../../type/category/CategoryType";
+import { CategoryType as CategoryType } from "../../type/category/CategoryType";
 import { IToDoType } from "../../type/todo/TodoType";
 import { onChange } from "../onChange/ChangeProperyInput";
 import {form} from "../../style/style";
-interface IConstEditCategory {
+type ConstEditCategory = {
     id: number,
-    category: ICategoryType | undefined
+    category: CategoryType | undefined
 }
 
 export function CategoryEdit() {
     const todo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo)
-    const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
     const navigate = useNavigate();
-    const editCategory: IConstEditCategory = {
+    const editCategory : ConstEditCategory = {
         id: -1,
         category: undefined,
     }
     const { id } = useParams();
-    console.log(id)
-    let Category: ICategoryType = {
+    let Category: CategoryType = {
         idCategory: 0,
         nameCategory: ""
     }
@@ -36,13 +34,21 @@ export function CategoryEdit() {
     if (editCategory.category != undefined) {
         Category = editCategory.category;
     }
-    const [category, setCategory] = useState<ICategoryType>(Category)
+    const [category, setCategory] = useState<CategoryType>(Category)
     const dispatch = useAppDispatch();
     const onFinish = (e: React.FormEvent) => {
+        console.log(id)
         e.preventDefault()
         if (category != undefined) {
             dispatch(updateCategory(category))
         }
+        dispatch(fetchToDo(todo.map((item)=>{
+            if(item.categoryId==category.idCategory){
+                return {...item, nameCategory: nameCategory};
+            }
+            return item;
+        })))
+        console.log("here error")
         navigate('/category');
     }
     const { nameCategory } = category
@@ -50,7 +56,7 @@ export function CategoryEdit() {
         return (
             <>  <form style={form} onSubmit={(e) => onFinish(e)}>
                 <div>
-                    <label>Name Category</label>
+                    <p>Name Category</p>
                     <input name='nameCategory' value={nameCategory} onChange={(e) => setCategory({ ...category, nameCategory: e.target.value })} required />
                 </div>
                 <div>
@@ -61,5 +67,5 @@ export function CategoryEdit() {
             </>
         );
     }
-    return (<p>Error</p>)
+    return (<p>Error: Category with id:{id} not found</p>)
 }

@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
-import { fetchToDo, removeTodo, updateTodo } from "../../store/Slice/todo/todoSlice";
+import { removeTodo, updateTodo } from "../../store/Slice/todo/todoSlice";
+import {block} from "../../style/style"
 import { RootState } from "../../store/store";
 import { center, itemTodo, itemTodoUndone } from "../../style/style";
 
@@ -15,24 +16,22 @@ function UndoneTodoList() {
   const deleteTodo = (id: number) => {
     dispatch(removeTodo(id));
   }
-  const [category, setCategory] = useState({
-    idCategory: -1,
-  });
+  const [idCategory, setCategory] = useState(0);
   const stringEdit = "/edit/todo/"
   if (todo.length == 0) {
     return (<h1 style={center}>Non Undone Todo</h1>)
   }
   return (<>
-
-    <select value={category.idCategory} onChange={(e) => setCategory({ ...category, idCategory: parseInt(e.target.value) })}>
-      <option value={-1}>None</option>
+     <div style={block}>
+    <select value={idCategory} onChange={(e) => setCategory(parseInt(e.target.value))}>
+      <option value={0}>None</option>
       {categories.map((item) =>
-        <option value={item.idCategory} >{item.nameCategory}</option>
+        <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>
       )}
     </select>
-    <table style={{marginLeft: "10%"}}>
+    <table >
       <caption>Current Todo</caption>
-      <br/>
+      <tbody>
       <tr>
         <th>Name Todo</th>
         <th>Dead Line</th>
@@ -42,20 +41,21 @@ function UndoneTodoList() {
         <th></th>
       </tr>
       {todo.map((item) => {
-        if (!item.taskCompleted && (!(category.idCategory != -1) || item.categoryId == category.idCategory))
+        if (!item.taskCompleted && (!(idCategory != 0) || item.categoryId == idCategory))
           return (
-          <tr style={itemTodo}>
+          <tr key={item.id} style={itemTodo}>
             <td >{item.nameTodo} </td>
             <td>{item.deadLine}</td>
             <td>{item.nameCategory}</td>
-            <td ><img style={{width: "60px"}} onClick={()=>dispatch(updateTodo({...item, taskCompleted: !item.taskCompleted}))} src={require('../../icons/accept.png')}/></td>
-            <td><NavLink to={stringEdit + item.id} >Edit</NavLink></td>
+            <td><img  onClick={()=>dispatch(updateTodo({...item, taskCompleted: !item.taskCompleted}))} src={require('../../icons/done.png')}/></td>
+            <td><NavLink to={stringEdit + item.id} ><img src={require('../../icons/edit.png')}/></NavLink></td>
             <td><img src={require('../../icons/delete.png')} onClick={() => deleteTodo(item.id)}/></td>
           </tr>);
       }
       )}
+      </tbody>
     </table>
-
+    </div>
   </>
   );
 }

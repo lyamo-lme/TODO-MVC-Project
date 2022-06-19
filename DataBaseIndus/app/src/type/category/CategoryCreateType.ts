@@ -1,3 +1,3 @@
-export interface ICategoryCreateType{
+export type CategoryCreateType={
     nameCategory: string
 }

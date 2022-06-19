@@ -5,20 +5,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { updateTodo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
-import { IToDoType } from "../../type/todo/TodoType";
+import { IToDoType as ToDoType } from "../../type/todo/TodoType";
 import {form} from "../../style/style";
-interface IConstEditTodo {
+type ConstEditTodo ={
     id: number,
-    todo: IToDoType | undefined
+    todo: ToDoType | undefined
 }
 export function TodoEdit() {
     const navigate = useNavigate();
-    const editTodo: IConstEditTodo = {
-        id: -1,
+    const editTodo: ConstEditTodo = {
+        id: 0,
         todo: undefined,
     }
     const { idTodo } = useParams();
-    let Todo: IToDoType = {
+    let Todo: ToDoType = {
         nameCategory: "",
         nameTodo: "",
         categoryId: 0,
@@ -34,19 +34,13 @@ export function TodoEdit() {
     if (editTodo.todo != undefined) {
         Todo = editTodo.todo;
     }
-    const [todo, setTodo] = useState<IToDoType>(Todo);
+    const [todo, setTodo] = useState<ToDoType>(Todo);
     const dispatch = useAppDispatch();
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault()
-        let nameCategory = (id:number)=>{
-            let name= categories.find((item)=>item.idCategory==id)?.nameCategory;
-            if(name!=undefined){
-                return name;
-            }
-            return '';
-          };
+        let nameCategory= categories.find((item)=>item.idCategory==todo.categoryId)?.nameCategory;
         if (todo != undefined) {
-            dispatch(updateTodo({...todo, nameCategory: nameCategory(todo.categoryId),taskCompleted: todo.taskCompleted}))
+            dispatch(updateTodo({...todo,nameCategory: nameCategory!=undefined?nameCategory:""}))
         }
         navigate('/todo');
     }
@@ -83,5 +77,5 @@ export function TodoEdit() {
             </>
         );
     }
-    return (<p>Error</p>)
+    return (<p>Error: Todo with id: {idTodo} not foun</p>)
 }

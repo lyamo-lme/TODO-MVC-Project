@@ -1,4 +1,4 @@
-export interface IToDoType{
+export type IToDoType={
     nameTodo: string,
     categoryId: number,
     taskCompleted: boolean,

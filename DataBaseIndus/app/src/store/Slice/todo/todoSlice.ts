@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { ToDoCreateType } from "../../../type/todo/TodoCreateType";
 import { IToDoType } from "../../../type/todo/TodoType";
 
 interface TodoState{
@@ -32,9 +33,11 @@ errorAddTodo: ''
     fetchToDoError:(state,action: PayloadAction<string>)=>{
         state.error=action.payload;
     },
-    addToDo:(state, action: PayloadAction<IToDoType>)=>{
-  
-       return {...state,todo: state.todo.concat(action.payload)};
+    addToDo:(state, action: PayloadAction<ToDoCreateType>)=>{
+       return {...state,todo: state.todo.concat({...action.payload,
+           id: state.todo.length==0? 1:state.todo[state.todo.length-1].id+1,
+           taskCompleted: false,
+         })};
     },
       removeTodo:(state, action: PayloadAction<number>)=>{
          console.log(action.payload);

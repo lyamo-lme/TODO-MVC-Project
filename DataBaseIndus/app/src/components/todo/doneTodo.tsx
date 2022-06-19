@@ -21,6 +21,7 @@ function DoneTodoList() {
     return (<>
         <table style={{ marginLeft: "10%" }}>
             <caption>Done</caption>
+            <tbody>
             <tr>
                 <th>Name Todo</th>
                 <th>Dead Line</th>
@@ -33,7 +34,7 @@ function DoneTodoList() {
             {todo.map((item) => {
                 if (item.taskCompleted)
                     return (
-                        <tr style={itemTodoUndone}>
+                        <tr key={item.id} style={itemTodoUndone}>
                             <td>{item.nameTodo} </td>
                             <td>{item.deadLine}</td>
                             <td>{item.nameCategory}</td>
@@ -41,6 +42,7 @@ function DoneTodoList() {
                             <td><img src={require('../../icons/delete.png')} onClick={() => deleteTodo(item.id)} /></td>
                         </tr>);
             })}
+              </tbody>
         </table>
 
     </>

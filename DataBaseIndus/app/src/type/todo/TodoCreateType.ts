@@ -1,5 +1,6 @@
-export interface IToDoCreateType{
+export type ToDoCreateType={
     nameTodo: string,
     categoryId: number,
-    deadLine: string
+    deadLine: string,
+    nameCategory: string
 }

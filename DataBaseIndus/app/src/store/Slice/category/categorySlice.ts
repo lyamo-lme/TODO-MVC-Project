@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICategoryType } from "../../../type/category/CategoryType";
+import { CategoryCreateType } from "../../../type/category/CategoryCreateType";
+import { CategoryType } from "../../../type/category/CategoryType";
 
 
 interface categoryState {
-    category: ICategoryType[],
+    category: CategoryType[],
     error: string,
     loading: boolean
 
@@ -11,10 +12,7 @@ interface categoryState {
 
 const initialState: categoryState = {
 
-    category: [{
-        idCategory:0,
-        nameCategory: "Work"
-    }] as ICategoryType[],
+    category: [] as CategoryType[],
     error: '',
     loading: true
 }
@@ -26,7 +24,7 @@ reducers:{
     fetchCategoryLoading:(state)=>{
         state.loading=true;
     },
-    fetchCategorySuccess:(state,action: PayloadAction<ICategoryType[]>)=>{
+    fetchCategorySuccess:(state,action: PayloadAction<CategoryType[]>)=>{
         state.loading=false;
         state.error='';
         state.category =action.payload;
@@ -34,14 +32,16 @@ reducers:{
     fetchCategoryError:(state,action: PayloadAction<string>)=>{
         state.error=action.payload;
     },
-    addCategory:(state, action: PayloadAction<ICategoryType>)=>{
-        return {...state,category: state.category.concat(action.payload)};
+    addCategory:(state, action: PayloadAction<CategoryCreateType>)=>{
+        return {...state,category: state.category.concat({...action.payload,
+        idCategory: state.category.length==0? 1: state.category[state.category.length-1].idCategory+1,
+        })};
     },
     removeCategory:(state,action: PayloadAction<number>)=>{
         return {...state, category: state.category.filter((item)=>item.idCategory!==action.payload)}
     },
-    updateCategory:(state,action:PayloadAction<ICategoryType>)=>{
-     const id = state.category.find(item => item.idCategory == action.payload.idCategory)?.idCategory
+    updateCategory:(state,action:PayloadAction<CategoryType>)=>{
+     const id = state.category.findIndex(item=> item.idCategory == action.payload.idCategory)
      var categories = state.category.slice() 
      if(id!=undefined){
         categories[id]=action.payload

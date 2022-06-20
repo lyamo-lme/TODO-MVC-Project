@@ -5,7 +5,6 @@ import { addCategory } from "../../store/Slice/category/categorySlice";
 import { RootState } from "../../store/store";
 import { CategoryCreateType } from "../../type/category/CategoryCreateType";
 import { onChange } from "../onChange/ChangeProperyInput";
-import {form} from "../../style/style";
 
 
 function CategoryCreate() {
@@ -24,14 +23,15 @@ function CategoryCreate() {
 
     return (
         <>
-            <form  style={form} onSubmit={(e) => onFinish(e)}>
-                <div>
-                    <p>Name Category</p>
-                    <input name='nameCategory' value={nameCategory} onChange={(e) => onChange((e), setCategory)} required />
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
+            <div className="block">
+                <form onSubmit={(e) => onFinish(e)}>
 
+                    <label>Name Category</label>
+                    <input name='nameCategory' value={nameCategory} onChange={(e) => onChange((e), setCategory)} required />
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </>
     );
 }

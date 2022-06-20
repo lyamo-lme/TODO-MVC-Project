@@ -1,83 +1,52 @@
-.active {
-    background-color: white;
+* {
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
 }
-
-a {
-    text-decoration: none;
-} 
-
-select, input{
-    border-radius: 10px;
-    padding:  0 10px  0 10px;
+.form {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
 }
-
+.form > div{
+    flex: auto;
+}
 img {
     width: 40px;
     height: 40px;
-    margin: 0 5px 0 5px;
-}
-button{
-    background-color: rgb(110, 207, 19);
-    border-radius: 10px;
-    border: 1px solid black;
-    padding:  1px 8px  1px 8px;
-}
-button:hover{
-    cursor: pointer;
-}
-header {
-    padding: 10px;
-    height: 35px;
-    background-color: black;
-    color: white;
 }
 
-form > div {
-    text-align: center;
-    flex: auto;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    font-size: 30px;
-    font-family: sans-serif;
-}
-
-header > a {
-    margin: 10px;
-    padding: 2px 8px 2px 8px;
-    border-radius: 5px;
-    color: white;
-}
-
-header > a.active {
-    color: black;
-}
-
-form {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-}
-
-
-
-caption {
-    font-size: 40px;
-}
-
-th {
-    border-bottom: 2px solid gray;
-}
-
-input {
-    border: 2px solid gray;
+.block {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 16px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    border: 1px solid gray;
+    padding: 10px 0 10px 10px;
 }
 
 table {
-    border-spacing: 0px;
-    text-align: center;
+    width: 90%;
     margin: 0 auto;
-    width: 80%;
+    text-align: center;
+}
+
+header {
+    width: 97%;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-top: 3px;
+    padding: 20px 0  20px 20px;
+    background-color: black;
+}
+
+header  a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    padding: 5px 5px 5px 5px ;
+    border-radius: 5px;
+}
+
+header>a.active {
+    color: black;
+    background-color: white;
 }

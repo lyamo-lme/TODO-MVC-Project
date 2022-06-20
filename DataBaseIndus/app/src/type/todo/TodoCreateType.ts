@@ -4,3 +4,9 @@ export type ToDoCreateType={
     deadLine: string,
     nameCategory: string
 }
+export const emptyCreateTodo:ToDoCreateType={
+    nameTodo: "",
+    categoryId: 0,
+    nameCategory: "",
+    deadLine: ""
+}

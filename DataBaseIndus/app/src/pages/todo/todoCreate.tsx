@@ -1,26 +1,20 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../store/hooks";
-import todoSlice, { addToDo } from "../../store/Slice/todo/todoSlice";
+import { addToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 import { onChange } from "../onChange/ChangeProperyInput";
-import { form } from "../../style/style";
-import { ToDoCreateType } from "../../type/todo/TodoCreateType";
+import { emptyCreateTodo, ToDoCreateType } from "../../type/todo/TodoCreateType";
 
 function TodoCreate() {
     const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
     const dispatch = useAppDispatch();
-    const [todo, setTodo] = useState<ToDoCreateType>({
-        nameTodo: '',
-        categoryId: 0,
-        deadLine: '',
-        nameCategory: ''
-    })
+    const [todo, setTodo] = useState<ToDoCreateType>(emptyCreateTodo)
 
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault();
         let nameCategory = categories.find((item) => item.idCategory == todo.categoryId)?.nameCategory;
-        dispatch(addToDo({ ...todo, nameCategory: nameCategory != undefined ? nameCategory : "" }))
+        dispatch(addToDo({ ...todo, nameCategory: nameCategory != undefined ? nameCategory : "No Category" }))
     }
 
     const { nameTodo, deadLine, categoryId } = todo
@@ -28,30 +22,28 @@ function TodoCreate() {
 
     return (
         <>
-            <form style={form} onSubmit={(e) => onFinish(e)}>
-                <div>
-                    <p>Name Todo</p>
-                    <input name='nameTodo' value={nameTodo} onChange={(e) => onChange((e), setTodo)} required />
-                </div>
-                <div>
-                    <p> Dead Line</p>
-                    <input name="deadLine" type="datetime-local" value={deadLine} onChange={(e) => onChange((e), setTodo)} />
-                </div>
-                <div>
-                    <p>Category</p>
-                    <select name="categoryId" value={categoryId} onChange={(e) => onChange((e), setTodo)}>
-                        <option value={0} >None</option>
-                        {categories.map((item) =>
-                            <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>
-                        )}
-                    </select>
-                </div>
-                <p>
+           <div className="block">
+                <form className="form" onSubmit={(e) => onFinish(e)}>
+                    <div>
+                        <label>Name Todo</label>
+                        <input name='nameTodo' value={nameTodo} onChange={(e) => onChange((e), setTodo)} required />
+                    </div>
+                    <div>
+                        <label> Dead Line</label>
+                        <input name="deadLine" type="datetime-local" value={deadLine} onChange={(e) => onChange((e), setTodo)} />
+                    </div>
+                    <div>
+                        <label>Category</label>
+                        <select name="categoryId" value={categoryId} onChange={(e) => onChange((e), setTodo)}>
+                            <option value={0} >None</option>
+                            {categories.map((item) =>
+                                <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>
+                            )}
+                        </select>
+                    </div>
                     <button type="submit">Submit</button>
-                </p>
-
-            </form>
-
+                </form>
+            </div>
         </>
     );
 }

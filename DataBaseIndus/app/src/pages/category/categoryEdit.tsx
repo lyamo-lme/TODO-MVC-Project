@@ -7,9 +7,7 @@ import { updateCategory } from "../../store/Slice/category/categorySlice";
 import { fetchToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 import { CategoryType as CategoryType } from "../../type/category/CategoryType";
-import { IToDoType } from "../../type/todo/TodoType";
-import { onChange } from "../onChange/ChangeProperyInput";
-import {form} from "../../style/style";
+
 type ConstEditCategory = {
     id: number,
     category: CategoryType | undefined
@@ -18,8 +16,8 @@ type ConstEditCategory = {
 export function CategoryEdit() {
     const todo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo)
     const navigate = useNavigate();
-    const editCategory : ConstEditCategory = {
-        id: -1,
+    const editCategory: ConstEditCategory = {
+        id: 0,
         category: undefined,
     }
     const { id } = useParams();
@@ -27,9 +25,7 @@ export function CategoryEdit() {
         idCategory: 0,
         nameCategory: ""
     }
-    if (id != undefined) {
-        editCategory.id = parseInt(id);
-    }
+    editCategory.id = id!=undefined? parseInt(id): 0;
     editCategory.category = useSelector((s: RootState) => s.rootReducer.categoryReducer.category.find(item => item.idCategory == editCategory.id))
     if (editCategory.category != undefined) {
         Category = editCategory.category;
@@ -42,9 +38,9 @@ export function CategoryEdit() {
         if (category != undefined) {
             dispatch(updateCategory(category))
         }
-        dispatch(fetchToDo(todo.map((item)=>{
-            if(item.categoryId==category.idCategory){
-                return {...item, nameCategory: nameCategory};
+        dispatch(fetchToDo(todo.map((item) => {
+            if (item.categoryId == category.idCategory) {
+                return { ...item, nameCategory: nameCategory };
             }
             return item;
         })))
@@ -54,7 +50,7 @@ export function CategoryEdit() {
     const { nameCategory } = category
     if (editCategory.category != undefined) {
         return (
-            <>  <form style={form} onSubmit={(e) => onFinish(e)}>
+            <>  <form  onSubmit={(e) => onFinish(e)}>
                 <div>
                     <p>Name Category</p>
                     <input name='nameCategory' value={nameCategory} onChange={(e) => setCategory({ ...category, nameCategory: e.target.value })} required />

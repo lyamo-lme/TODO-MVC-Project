@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { removeCategory } from "../../store/Slice/category/categorySlice";
 import { RootState } from "../../store/store";
-import { block, center } from "../../style/style";
 
 
 function CategoryList() {
@@ -13,14 +12,14 @@ function CategoryList() {
     }
     if (categories.length == 0) {
         return (
-            <h1 style={center}>Non Categories</h1>
+            <h1 >Non Categories</h1>
 
         )
     }
     return (
         <>
-            <div style={block}>
-                <div style={center}>CategoryList</div>
+            <div>
+                <div >CategoryList</div>
 
                 <table style={{ width: "80%" }}>
                 <tbody>

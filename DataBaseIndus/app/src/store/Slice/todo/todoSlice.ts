@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ToDoCreateType } from "../../../type/todo/TodoCreateType";
-import { IToDoType } from "../../../type/todo/TodoType";
+import { ToDoType } from "../../../type/todo/TodoType";
 
 interface TodoState{
-todo: IToDoType[],
+todo: ToDoType[],
 loading: boolean,
 error: string,
 
@@ -12,7 +12,7 @@ errorAddTodo: string,
 }
 
 const initialState:TodoState = {
-todo: [] as IToDoType[],
+todo: [] as ToDoType[],
 loading: true,
 error: '',
 
@@ -24,7 +24,7 @@ errorAddTodo: ''
     name: 'todo',
     initialState,
     reducers:{
-    fetchToDo:(state,action: PayloadAction<IToDoType[]>)=>{
+    fetchToDo:(state,action: PayloadAction<ToDoType[]>)=>{
         return {...state, todo: action.payload}
     },
     fetchToDoSuccess:(state,action: PayloadAction<boolean>)=>{
@@ -43,7 +43,7 @@ errorAddTodo: ''
          console.log(action.payload);
        return {...state, todo: state.todo.filter(item=>item.id!==action.payload) }
    },
-     updateTodo:(state,action:PayloadAction<IToDoType>)=>{
+     updateTodo:(state,action:PayloadAction<ToDoType>)=>{
       const id = state.todo.find(item => item.id == action.payload.id)?.id
       var todos = state.todo.slice() 
       if(id!=undefined){

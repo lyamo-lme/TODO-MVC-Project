@@ -3,9 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
 import { removeTodo, updateTodo } from "../../store/Slice/todo/todoSlice";
-import {block} from "../../style/style"
 import { RootState } from "../../store/store";
-import { center, itemTodo, itemTodoUndone } from "../../style/style";
 
 
 function UndoneTodoList() {
@@ -19,10 +17,10 @@ function UndoneTodoList() {
   const [idCategory, setCategory] = useState(0);
   const stringEdit = "/edit/todo/"
   if (todo.length == 0) {
-    return (<h1 style={center}>Non Undone Todo</h1>)
+    return (<h1 >Non Undone Todo</h1>)
   }
   return (<>
-     <div style={block}>
+     <div className="block">
     <select value={idCategory} onChange={(e) => setCategory(parseInt(e.target.value))}>
       <option value={0}>None</option>
       {categories.map((item) =>
@@ -43,7 +41,7 @@ function UndoneTodoList() {
       {todo.map((item) => {
         if (!item.taskCompleted && (!(idCategory != 0) || item.categoryId == idCategory))
           return (
-          <tr key={item.id} style={itemTodo}>
+          <tr key={item.id} >
             <td >{item.nameTodo} </td>
             <td>{item.deadLine}</td>
             <td>{item.nameCategory}</td>

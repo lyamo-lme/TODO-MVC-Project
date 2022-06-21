@@ -4,7 +4,10 @@ import { useAppDispatch } from "../../store/hooks";
 import { addToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 import { onChange } from "../onChange/ChangeProperyInput";
+
 import { emptyCreateTodo, ToDoCreateType } from "../../type/todo/TodoCreateType";
+import moment from "moment";
+import { dateToSting } from "../../parseDate/parseDate";
 
 function TodoCreate() {
     const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
@@ -14,7 +17,12 @@ function TodoCreate() {
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault();
         let nameCategory = categories.find((item) => item.idCategory == todo.categoryId)?.nameCategory;
-        dispatch(addToDo({ ...todo, nameCategory: nameCategory != undefined ? nameCategory : "No Category" }))
+        dispatch(addToDo(
+            { ...todo,
+                 nameCategory: nameCategory != undefined ? nameCategory : "No Category",
+                 deadLine: dateToSting(deadLine)
+                 }))
+
     }
 
     const { nameTodo, deadLine, categoryId } = todo
@@ -22,7 +30,7 @@ function TodoCreate() {
 
     return (
         <>
-           <div className="block">
+            <div className="block form">
                 <form className="form" onSubmit={(e) => onFinish(e)}>
                     <div>
                         <label>Name Todo</label>
@@ -41,7 +49,10 @@ function TodoCreate() {
                             )}
                         </select>
                     </div>
-                    <button type="submit">Submit</button>
+                    <div>
+                        <button type="submit">Submit</button>
+                    </div>
+
                 </form>
             </div>
         </>

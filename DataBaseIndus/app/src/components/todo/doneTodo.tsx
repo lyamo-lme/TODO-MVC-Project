@@ -18,32 +18,33 @@ function DoneTodoList() {
         return (<h1>Non Done Todo</h1>)
     }
     return (<>
-        <table style={{ marginLeft: "10%" }}>
-            <caption>Done</caption>
-            <tbody>
-            <tr>
-                <th>Name Todo</th>
-                <th>Dead Line</th>
-                <th>Category</th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
+        <div className="block">
+            <table style={{ marginLeft: "10%" }}>
+                <caption>Done</caption>
+                <tbody>
+                    <tr>
+                        <th>Name Todo</th>
+                        <th>Dead Line</th>
+                        <th>Category</th>
+                        <th colSpan={3}>Actions</th>
 
-            {todo.map((item) => {
-                if (item.taskCompleted)
-                    return (
-                        <tr key={item.id}>
-                            <td>{item.nameTodo} </td>
-                            <td>{item.deadLine}</td>
-                            <td>{item.nameCategory}</td>
-                            <td><NavLink to={stringEdit + item.id} >Edit</NavLink></td>
-                            <td><img src={require('../../icons/delete.png')} onClick={() => deleteTodo(item.id)} /></td>
-                        </tr>);
-            })}
-              </tbody>
-        </table>
+                    </tr>
 
+                    {todo.map((item) => {
+                        if (item.taskCompleted)
+                            return (
+                                <tr key={item.id}>
+                                    <td>{item.nameTodo} </td>
+                                    <td>{item.deadLine==""?"None":item.deadLine}</td>
+                                    <td>{item.nameCategory}</td>
+                                    <td><img onClick={() => dispatch(updateTodo({ ...item, taskCompleted: !item.taskCompleted }))} src={require('../../icons/done.png')} /></td>
+                                    <td><NavLink to={stringEdit + item.id} ><img src={require('../../icons/edit.png')} /></NavLink></td>
+                                    <td><img src={require('../../icons/delete.png')} onClick={() => deleteTodo(item.id)} /></td>
+                                </tr>);
+                    })}
+                </tbody>
+            </table>
+        </div>
     </>
     );
 

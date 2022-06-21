@@ -43,7 +43,7 @@ function UndoneTodoList() {
           return (
           <tr key={item.id} >
             <td >{item.nameTodo} </td>
-            <td>{item.deadLine}</td>
+            <td>{item.deadLine==""?"None":item.deadLine}</td>
             <td>{item.nameCategory}</td>
             <td><img  onClick={()=>dispatch(updateTodo({...item, taskCompleted: !item.taskCompleted}))} src={require('../../icons/done.png')}/></td>
             <td><NavLink to={stringEdit + item.id} ><img src={require('../../icons/edit.png')}/></NavLink></td>

@@ -8,34 +8,6 @@ import { fetchToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 import { CategoryType as CategoryType, emptyCategoryType as emptyCategory } from "../../type/category/CategoryType";
 
-
-/*
- const navigate = useNavigate();
-    const { idTodo } = useParams();
-    let Todo = emptyTodo;
-    let id = 0;
-
-    if (idTodo != undefined) {
-        id = parseInt(idTodo);
-    }
-    const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category);
-    const findTodo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo.find(item => item.id == id))
-    Todo = findTodo != undefined ? findTodo : emptyTodo;
-    const [todo, setTodo] = useState<ToDoType>({ ...Todo, deadLine: stringToDate(Todo.deadLine) });
-    const dispatch = useAppDispatch();
-
-    const onFinish = (e: React.FormEvent) => {
-        e.preventDefault()
-        let nameCategory = categories.find((item) => item.idCategory == todo.categoryId)?.nameCategory;
-        if (todo != undefined) {
-            dispatch(updateTodo({
-                ...todo, nameCategory: nameCategory != undefined ? nameCategory : "No Category",
-                deadLine: dateToSting(deadLine)
-            }))
-        }
-        navigate('/todo');
-    }
-*/
 export function CategoryEdit() {
     const todo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo)
     const dispatch = useAppDispatch();

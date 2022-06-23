@@ -1,7 +1,6 @@
 using ToDoList.GraphQL;
 using GraphQL.MicrosoftDI;
 using GraphQL.Server;
-using GraphQL.Types;
 using ToDoList.Data;
 
 var builder = WebApplication.CreateBuilder(args);

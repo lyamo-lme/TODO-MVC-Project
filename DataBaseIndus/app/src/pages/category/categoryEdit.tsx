@@ -47,5 +47,6 @@ export function CategoryEdit() {
             </>
         );
     }
-    return (<p>Error: Category with id:{id} not found</p>)
+
+    return (<div className="block">Error: Category with id:{id} not found</div>)
 }

@@ -17,7 +17,7 @@ function UndoneTodoList() {
   const [idCategory, setCategory] = useState(0);
   const stringEdit = "/edit/todo/"
   if (todo.length == 0) {
-    return (<h1 >Non Undone Todo</h1>)
+    return (<div className="block"><i>Non UnDone Todo</i></div>)
   }
   return (<>
      <div className="block">
@@ -28,15 +28,13 @@ function UndoneTodoList() {
       )}
     </select>
     <table >
-      <caption>Current Todo</caption>
+      <caption>Current Todos</caption>
       <tbody>
       <tr>
         <th>Name Todo</th>
         <th>Dead Line</th>
         <th>Category</th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th colSpan={3}>Actions</th>
       </tr>
       {todo.map((item) => {
         if (!item.taskCompleted && (!(idCategory != 0) || item.categoryId == idCategory))

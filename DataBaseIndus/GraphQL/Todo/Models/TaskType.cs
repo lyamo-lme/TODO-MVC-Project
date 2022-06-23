@@ -14,7 +14,7 @@ namespace ToDoList.GraphQL.TaskQL.Models
             Field(prop => prop.NameTodo, nullable: false).Description("Todo NameTodo");
             Field(prop => prop.TaskCompleted, nullable: false).Description("Todo TodoCompleted");
             Field(prop => prop.DeadLine, nullable: true).Description("Todo DeadLine");
-            Field(prop => prop.CategoryId, nullable: false).Description("Todo CategoryId");
+            Field(prop => prop.CategoryId, nullable: true).Description("Todo CategoryId");
             Field(prop => prop.NameCategory, nullable: true).Description("Todo NameCategory");
 
         }

@@ -17,18 +17,18 @@ namespace ToDoList.GraphQL.Categories
 
             Field<NonNullGraphType<ListGraphType<CategoryType>>, List<Category>>()
                  .Name("GetAllCategories")
-                 .Resolve(context =>
+                 .ResolveAsync(async context =>
                  {
-                     return categoryRepository.GetCategories();
+                     return   await categoryRepository.GetCategories();
                  }
                  );
 
             Field<CategoryType, Category>()
                 .Name("GetCategoryById")
                 .Argument<IntGraphType, int>("CategoryId", "id for get category")
-                .Resolve(context=>
+                .ResolveAsync(async context=>
                 {
-                    return categoryRepository.GetCategoryTasks(context.GetArgument<int>("CategoryId"));
+                    return await categoryRepository.GetCategoryTasks(context.GetArgument<int>("CategoryId"));
                 }
                 );
 

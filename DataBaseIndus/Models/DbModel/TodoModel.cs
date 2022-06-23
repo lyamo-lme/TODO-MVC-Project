@@ -9,7 +9,7 @@ namespace ToDoList.Models.DbModel
         [Required(ErrorMessage = "Please name")]
         public string NameTodo { get; set; }
         public DateTime? DeadLine { get; set; }
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; } = 0;
         public bool TaskCompleted { get; set; } = false;
         public virtual string? NameCategory { get; set; }
     }

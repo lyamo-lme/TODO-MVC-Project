@@ -13,9 +13,10 @@
     <div>
         <label>Категория</label>
         <select name="CategoryId">
+                <option  value="0">None</option>
             @foreach (var category in Model.categoryViewModels)
             {
-                <option required value="@category.IdCategory"> @category.NameCategory</option>
+                <option  value="@category.IdCategory"> @category.NameCategory</option>
             }
         </select>
     </div>

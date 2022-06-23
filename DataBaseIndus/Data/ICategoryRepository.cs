@@ -4,11 +4,11 @@ namespace ToDoList.Data
 {
     public interface ICategoryRepository
     {
-        Category CreateCategory(Category model);
-        List<Category> GetCategories();
-        Category GetCategoryTasks(int id);
-        Category GetCategoryById(int id);
-        Category EditCategory(Category model) ;
-        int DeleteCategory(int id);
+        Task<Category> CreateCategory(Category model);
+        Task<List<Category>> GetCategories();
+        Task<Category> GetCategoryTasks(int id);
+        Task<Category> GetCategoryById(int id);
+        Task<Category> EditCategory(Category model) ;
+        Task<int> DeleteCategory(int id);
     }
 }

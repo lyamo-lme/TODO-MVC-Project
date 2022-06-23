@@ -15,33 +15,36 @@ function DoneTodoList() {
     }
     const stringEdit = "/edit/todo/"
     if (todo.length == 0) {
-        return (<h1>Non Done Todo</h1>)
+        return (<div className="block"><i>Non Done Todo</i></div>)
     }
     return (<>
         <div className="block">
-            <table style={{ marginLeft: "10%" }}>
-                <caption>Done</caption>
+            <table className="undoneTodo">
+                <caption>Done Todos</caption>
                 <tbody>
                     <tr>
                         <th>Name Todo</th>
                         <th>Dead Line</th>
                         <th>Category</th>
                         <th colSpan={3}>Actions</th>
-
                     </tr>
 
                     {todo.map((item) => {
                         if (item.taskCompleted)
                             return (
+                                
                                 <tr key={item.id}>
+                                    <hr/>
                                     <td>{item.nameTodo} </td>
-                                    <td>{item.deadLine==""?"None":item.deadLine}</td>
+                                    <td>{item.deadLine == "" ? "None" : item.deadLine}</td>
                                     <td>{item.nameCategory}</td>
                                     <td><img onClick={() => dispatch(updateTodo({ ...item, taskCompleted: !item.taskCompleted }))} src={require('../../icons/done.png')} /></td>
                                     <td><NavLink to={stringEdit + item.id} ><img src={require('../../icons/edit.png')} /></NavLink></td>
                                     <td><img src={require('../../icons/delete.png')} onClick={() => deleteTodo(item.id)} /></td>
-                                </tr>);
+                                </tr>
+                            );
                     })}
+
                 </tbody>
             </table>
         </div>

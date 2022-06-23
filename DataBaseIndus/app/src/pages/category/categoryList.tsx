@@ -12,30 +12,27 @@ function CategoryList() {
     }
     if (categories.length == 0) {
         return (
-            <h1 >Non Categories</h1>
-
+            <div className="block"><i>Non Categories</i></div>
         )
     }
     return (
         <>
-            <div>
-                <div >CategoryList</div>
-
-                <table style={{ width: "80%" }}>
-                <tbody>
-                    <tr>
-                        <th>Category</th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    {categories.map((item) =>
-                        <tr key={item.idCategory}>
-                            <td>{item.nameCategory}</td>
-                            <td><NavLink to={'/edit/category/' + item.idCategory}>Edit</NavLink></td>
-                            <td><img src={require('../../icons/delete.png')} onClick={() => deleteCategory(item.idCategory)} /></td>
+            <div className="block">
+                <table>
+                    <caption>List of Categories</caption>
+                    <tbody>
+                        <tr>
+                            <th>Category</th>
+                            <th colSpan={2}>Actions</th>
                         </tr>
-                    )}
-                     </tbody>
+                        {categories.map((item) =>
+                            <tr key={item.idCategory}>
+                                <td>{item.nameCategory}</td>
+                                <td><NavLink to={'/edit/category/' + item.idCategory}><img src={require('../../icons/edit.png')} /></NavLink></td>
+                                <td><img src={require('../../icons/delete.png')} onClick={() => deleteCategory(item.idCategory)} /></td>
+                            </tr>
+                        )}
+                    </tbody>
                 </table>
             </div>
         </>

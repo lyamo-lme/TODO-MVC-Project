@@ -16,10 +16,11 @@ namespace ToDoList.GraphQL.Categories.Models
 
             Field<NonNullGraphType<ListGraphType<TaskType>>, List<TodoModel>>()
                .Name("tasks")
-               .Resolve(context =>
+               .ResolveAsync( async context =>
                { 
                    int categoryId = context.Source.IdCategory;
-                   return  CurrentRepository.categoryRepository.GetCategoryTasks(categoryId).tasks;
+                   var category = await CurrentRepository.categoryRepository.GetCategoryTasks(categoryId);
+                   return category.tasks;
                });
 
         }

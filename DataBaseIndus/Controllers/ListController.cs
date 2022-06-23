@@ -13,7 +13,7 @@ namespace ToDoList.Controllers
         public ICategoryRepository categoryRepository { get; set; }
         public IMapper Mapper { get; set; }
         public ITodoRepository taskRepository { get; set; }
-        public ListController(IMapper mapper, IConfiguration configuration,IServiceProvider service)
+        public ListController(IMapper mapper, IConfiguration configuration, IServiceProvider service)
         {
 
             CurrentRepository.ChangeRepository(service, CurrentRepository.currentSource);
@@ -30,41 +30,46 @@ namespace ToDoList.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-         
+            var categories = await categoryRepository.GetCategories();
+            var category = Mapper.Map<List<CategoryViewModel>>(categories);
             ViewModel model = new ViewModel
             {
                 Tasks = taskRepository.GetTasks(),
-                categoryViewModels = Mapper.Map<List<CategoryViewModel>>(categoryRepository.GetCategories())
+                categoryViewModels = category
             };
-            return View("ListTasks",model);
+            return View("ListTasks", model);
         }
         [HttpPost]
-        public IActionResult CreateTodo(CreateTodoModel model)
+        public async Task<IActionResult> CreateTodo(CreateTodoModel model)
         {
 
-          /*  if (ModelState.IsValid)
-            {*/
-                taskRepository.CreateTask(Mapper.Map<TodoModel>(model));
+            if (ModelState.IsValid)
+            {
+                var task = taskRepository.CreateTask(Mapper.Map<TodoModel>(model));
                 return RedirectToAction("Index");
-           // }
-          /*  else
-            {*/
-                ViewModel Model = new ViewModel
-                {
-                    Tasks = taskRepository.GetTasks(),
-                    Categories = categoryRepository.GetCategories()
-                };
-                return View("ListTasks", Model);
-            //}
+            }
+            var categories = await categoryRepository.GetCategories();
+            ViewModel Model = new ViewModel
+            {
+                Tasks = taskRepository.GetTasks(),
+                Categories = categories
+            };
+            return View("ListTasks", Model); 
+
         }
         [HttpGet]
-        public IActionResult EditTask(int id)
+        public async Task<IActionResult> EditTask(int id)
         {
-            ViewModel model = new ViewModel();
-            model.Categories = categoryRepository.GetCategories();
-            model.EditModel = Mapper.Map<EditTodoModel>(taskRepository.GetTaskId(id));
+            var categories = await categoryRepository.GetCategories();
+            ViewModel model = new ViewModel
+            {
+                Categories = categories,
+                EditModel = Mapper.Map<EditTodoModel>(taskRepository.GetTaskId(id))
+            };
+
+
             return View("EditTaskForm", model);
         }
         [HttpPost]
@@ -97,6 +102,6 @@ namespace ToDoList.Controllers
             }
             return Redirect(message);
         }
-        
+
     }
 }

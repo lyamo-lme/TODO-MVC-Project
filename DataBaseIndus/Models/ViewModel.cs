@@ -12,5 +12,7 @@ namespace ToDoList.Models
         public List<TodoModel> Tasks = new List<TodoModel>();
         public List<Category> Categories= new List<Category>();
         public List<CategoryViewModel> categoryViewModels = new List<CategoryViewModel>();
+
+        
     }
 }

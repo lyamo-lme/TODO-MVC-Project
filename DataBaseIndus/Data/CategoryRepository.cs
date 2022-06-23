@@ -21,75 +21,78 @@ namespace ToDoList.Data
             get => new SqlConnection(connectionString);
 
         }
-        public Category CreateCategory(Category model)
+        public async Task<Category> CreateCategory(Category model)
         {
             using (Connection)
             {
-                string Query = @"Insert INTO Categories (NameCategory)
+                string query = @"Insert INTO Categories (NameCategory)
                        Values(@NameCategory)
                        SELECT @@IDENTITY
                       ";
-                 Connection.Open();
+                Connection.Open();
 
-                int Id = Connection.Query<int>(Query,model).LastOrDefault();
+                int Id = await Connection.QuerySingleAsync<int>(query, model);
                 Connection.Close();
-                return GetCategoryById(Id);
+                return await GetCategoryById(Id);
             }
         }
-        public Category GetCategoryTasks(int id)
+        public async Task<Category> GetCategoryTasks(int id)
         {
-            var sql = @"select b.IdCategory , b.NameCategory from Categories b where IdCategory = @id";
-            using (IDbConnection connection = Connection)
-            {
-                connection.Open();
-                Category category = connection.Query<Category>(sql, new { id } ).FirstOrDefault();
-                sql = $"Select * from Tasks Where CategoryId={id} ORDER BY case when DeadLine is null then 1 else 0 end, DeadLine asc";
-                category.tasks = connection.Query<TodoModel>(sql,category.tasks).ToList();
-                connection.Close();
-                return category;
-            }
-        }
-        public Category GetCategoryById(int id) {
-            var sql = @"select b.IdCategory , b.NameCategory from Categories b where IdCategory = @id ";
-            using (IDbConnection connection = Connection)
-            {
-                connection.Open();
-                Category category = connection.Query<Category>(sql, new { id }).FirstOrDefault();
+            var sql = $"Select * from Tasks Where CategoryId={id} ORDER BY case when DeadLine is null then 1 else 0 end, DeadLine asc";
 
-                connection.Close();
-                return category;
-            }
-
-        }
-        public int DeleteCategory(int id) {
-            using (IDbConnection connection = Connection)
-            {
-                string sql = $"Delete From Categories Where IdCategory={id}";
-                connection.Open();
-                int result =connection.Execute(sql);
-                connection.Close();
-                return result;
-             }
-        }
-        public Category EditCategory(Category model) {
-            using (IDbConnection connection = Connection)
-            {
-                string sql = "Update Categories SET NameCategory=@NameCategory Where IdCategory=@IdCategory";
-                connection.Open();
-                connection.Query(sql, model);
-                connection.Close();
-                return GetCategoryTasks(model.IdCategory);
-            }
-        }
-        public List<Category> GetCategories()
-        {
-            string Query = "Select * From Categories";
             using (Connection)
             {
                 Connection.Open();
-                List<Category> categories = Connection.Query<Category>(Query).ToList();
+                Category category = await GetCategoryById(id);
+                IEnumerable<TodoModel> Tasks = await Connection.QueryAsync<TodoModel>(sql, category.tasks);
+                category.tasks = Tasks.ToList();
                 Connection.Close();
-                return categories;
+                return category;
+            }
+        }
+        public async Task<Category> GetCategoryById(int id)
+        {
+            var sql = @"select b.IdCategory , b.NameCategory from Categories b where IdCategory = @id ";
+            using (Connection)
+            {
+                Connection.Open();
+                Category category = await Connection.QueryFirstAsync<Category>(sql, new { id });
+                Connection.Close();
+                return category;
+            }
+
+        }
+        public async Task<int> DeleteCategory(int id)
+        {
+            using (Connection)
+            {
+                string sql = $"Delete From Categories Where IdCategory={id}";
+                Connection.Open();
+                int result = await Connection.ExecuteAsync(sql);
+                Connection.Close();
+                return result;
+            }
+        }
+        public async Task<Category> EditCategory(Category model)
+        {
+            using (Connection)
+            {
+                string sql = "Update Categories SET NameCategory=@NameCategory Where IdCategory=@IdCategory";
+                Connection.Open();
+                await Connection.QueryAsync(sql, model);
+                Connection.Close();
+                return await GetCategoryTasks(model.IdCategory);
+            }
+        }
+        public async Task<List<Category>> GetCategories()
+        {
+            string query = "Select * From Categories";
+            using (Connection)
+            {
+                Connection.Open();
+                var categories = await Connection.QueryAsync<Category>(query);
+                Connection.Close();
+                return categories.ToList();
             }
         }
     }

@@ -23,7 +23,7 @@ function CategoryCreate() {
 
     return (
         <>
-            <div className="block form">
+            <div className="block-form form">
                 <form className="form" onSubmit={(e) => onFinish(e)}>
                     <div>
                         <label>Name Category</label>

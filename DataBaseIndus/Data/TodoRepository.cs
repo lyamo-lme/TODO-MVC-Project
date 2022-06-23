@@ -27,18 +27,14 @@ namespace ToDoList.Data
                  INSERT INTO TASKS ({nameof(model.NameTodo)}, {nameof(model.DeadLine)}, {nameof(model.CategoryId)},{nameof(model.TaskCompleted)})
                         VALUES (@{nameof(model.NameTodo)},@{nameof(model.DeadLine)},@{nameof(model.CategoryId)},@{nameof(model.TaskCompleted)})
                        SELECT @@IDENTITY";
-            try
+
+            using (IDbConnection connection = Connection)
             {
-                using (IDbConnection connection = Connection)
-                {
-                    connection.Open();
-                    int Id = connection.Query<int>(query, model).LastOrDefault();
-                    connection.Close();
-                    return GetTaskId(Id);
-                }
+                connection.Open();
+                int id = connection.QueryFirst<int>(query, model); 
+                connection.Close();
+                return GetTaskId(id);
             }
-            catch { }
-            return null;
         }
         public List<TodoModel> GetTasks(int? mode = 0)
         {
@@ -68,7 +64,7 @@ namespace ToDoList.Data
 
                 string sql = "Select * From Tasks Where Id=@id";
                 connection.Open();
-                TodoModel model = connection.Query<TodoModel>(sql, new { id }).FirstOrDefault();
+                TodoModel model = connection.QueryFirstOrDefault<TodoModel>(sql, new { id });
                 connection.Close();
                 return model;
             }

@@ -7,5 +7,5 @@ export function dateToSting(date: string) {
 
 export function stringToDate(date: string) {
     date = moment(date).format("YYYY-M-DDTHH:mm")
-    return date == "Invalid date" ? "" : date;;
+    return date == "Invalid date" ? "" : date;
 }

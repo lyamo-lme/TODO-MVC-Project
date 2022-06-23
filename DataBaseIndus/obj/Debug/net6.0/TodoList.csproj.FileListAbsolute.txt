@@ -133,10 +133,6 @@ C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\refin
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.pdb
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.genruntimeconfig.cache
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ref\ToDoList.dll
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\my-app\package-lock.json
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\my-app\package.json
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\my-app\public\manifest.json
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\my-app\tsconfig.json
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\app\package-lock.json
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\app\package.json
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\bin\Debug\net6.0\app\public\manifest.json

@@ -8,14 +8,12 @@ namespace ToDoList.Data
     {
         private string TasksDirectoryPath { get; set; } = Directory.GetCurrentDirectory() + @"/XmlStorage/Tasks.xml";
         private string DirectoryPathCategories { get; set; } = Directory.GetCurrentDirectory() + @"/XmlStorage/Categories.xml";
-        public CategoryRepositoryXML()
-        {
-        }
+        public CategoryRepositoryXML() { }
 
-        public  Category CreateCategory(Category model)
+        public  async Task<Category> CreateCategory(Category model)
         {
 
-            XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
+            XDocument CategoriesXML =  XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").LastOrDefault();
             int Id =  (int)element.Element("idcategory");
             Id++;
@@ -24,9 +22,9 @@ namespace ToDoList.Data
 
             CategoriesXML.Element("categories").Add(CreateModel);
             CategoriesXML.Save(DirectoryPathCategories);
-            return GetCategoryById(Id);
+            return await GetCategoryById(Id);
         }
-        public Category GetCategoryTasks(int id)
+        public async Task<Category> GetCategoryTasks(int id)
         {
 
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
@@ -53,7 +51,7 @@ namespace ToDoList.Data
 
             return model;
         }
-        public Category GetCategoryById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id);
@@ -67,7 +65,7 @@ namespace ToDoList.Data
 
             return model;
         }
-        public int DeleteCategory(int id)
+        public async Task<int> DeleteCategory(int id)
         {
             try
             {
@@ -82,15 +80,15 @@ namespace ToDoList.Data
                 return 0;
             }
         }
-        public Category EditCategory(Category model)
+        public  async Task<Category> EditCategory(Category model)
         {
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == model.IdCategory);
             element.SetElementValue("namecategory", model.NameCategory);
             CategoriesXML.Save(DirectoryPathCategories);
-            return GetCategoryTasks(model.IdCategory);
+            return await GetCategoryTasks(model.IdCategory);
         }
-        public List<Category> GetCategories()
+        public async Task<List<Category>> GetCategories()
         {
 
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);

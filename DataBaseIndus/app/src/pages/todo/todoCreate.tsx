@@ -6,7 +6,6 @@ import { RootState } from "../../store/store";
 import { onChange } from "../onChange/ChangeProperyInput";
 
 import { emptyCreateTodo, ToDoCreateType } from "../../type/todo/TodoCreateType";
-import moment from "moment";
 import { dateToSting } from "../../parseDate/parseDate";
 
 function TodoCreate() {
@@ -18,10 +17,10 @@ function TodoCreate() {
         e.preventDefault();
         let nameCategory = categories.find((item) => item.idCategory == todo.categoryId)?.nameCategory;
         dispatch(addToDo(
-            { ...todo,
-                 nameCategory: nameCategory != undefined ? nameCategory : "No Category",
-                 deadLine: dateToSting(deadLine)
-                 }))
+            {...todo,
+                nameCategory: nameCategory != undefined ? nameCategory : "No Category",
+                deadLine: dateToSting(deadLine)
+            }))
 
     }
 
@@ -30,7 +29,7 @@ function TodoCreate() {
 
     return (
         <>
-            <div className="block form">
+            <div className="block-form form">
                 <form className="form" onSubmit={(e) => onFinish(e)}>
                     <div>
                         <label>Name Todo</label>

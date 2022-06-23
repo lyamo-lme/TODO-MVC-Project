@@ -21,9 +21,9 @@ namespace ToDoList.Controllers
             taskRepository = CurrentRepository.taskRepository;
             Mapper = mapper;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            List<Category> Categories = categoryRepository.GetCategories();
+            List<Category> Categories = await categoryRepository.GetCategories();
             //Mapper.Map<List<CategoryViewModel>>(CategoryConnection.GetCategories());
             return View("ListCategories", Categories);
         }
@@ -61,28 +61,25 @@ namespace ToDoList.Controllers
                 return View("EditCategoryForm", model);
             }
         }
-        public IActionResult CategoryWithTasks(int id = 0)
+        public async Task<IActionResult> CategoryWithTasks(int id = 0)
         {
             if (id != 0)
             {
-                Category category = categoryRepository.GetCategoryTasks(id);
+                Category category = await categoryRepository.GetCategoryTasks(id);
                 return View("CategoryWithTasks", category);
             }
             return RedirectToAction("Index");
         }
-        public IActionResult DeleteCategory(int id = 0)
+        public async Task<IActionResult> DeleteCategory(int id = 0)
         {
-            try
+            int i=0;
+            if (id != 0)
             {
-                if (id != 0)
-                {
-                    categoryRepository.DeleteCategory(id);
-                }
+                i = await categoryRepository.DeleteCategory(id);
             }
-            catch
-            {
-                return View("Views/Error.cshtml", new { error= "Не можна видалити поки є завдання повязанні з цією категорією"});
-            }
+            if (i == 0)
+            return View("Views/Error.cshtml", new { error = "Не можна видалити поки є завдання повязанні з цією категорією" });
+
             return RedirectToAction("Index");
         }
     }

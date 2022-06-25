@@ -31,7 +31,7 @@
         <th>NameCategory</th>
         <th>Actions</th>
     </tr>
-    @foreach (var task in @Model.Tasks)
+    @foreach (var task in @Model.Todos)
     {
         @if(task.TaskCompleted){
         <tr>
@@ -57,7 +57,7 @@
         <th>NameCategory</th>
         <th>Actions</th>
     </tr>
-    @foreach (var task in @Model.Tasks)
+    @foreach (var task in @Model.Todos)
     {
         @if(!task.TaskCompleted){
         <tr>

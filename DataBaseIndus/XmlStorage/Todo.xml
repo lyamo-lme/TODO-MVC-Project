@@ -1,18 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <tasks>
-  <task taskcompleted="true">
-    <id>3</id>
-    <nametask>SomeTask</nametask>
-    <taskcompleted>true</taskcompleted>
-    <deadline>12.12.2003 12:12:00</deadline>
-    <categoryid>1</categoryid>
-  </task>
   <task>
     <id>4</id>
     <nametask>sda</nametask>
     <taskcompleted>0</taskcompleted>
     <deadline></deadline>
     <categoryid>2</categoryid>
+    <nametodo>sda</nametodo>
   </task>
   <task>
     <id>5</id>

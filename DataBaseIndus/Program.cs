@@ -10,6 +10,16 @@ builder.Services.AddTransient<CategoryRepositoryXML>();
 builder.Services.AddTransient<TodoRepositoryXML>();
 builder.Services.AddTransient<TodoRepository>();
 builder.Services.AddTransient<CategoryRepository>();
+builder.Services.AddCors(
+    builder => {
+        builder.AddDefaultPolicy(option =>
+        {
+            option.AllowAnyOrigin();
+            option.AllowAnyMethod();
+            option.AllowAnyHeader();
+        });
+    }
+    );
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -35,7 +45,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCors(x => x
+         .AllowAnyOrigin()
+         .AllowAnyMethod()
+         .AllowAnyHeader());
 app.UseRouting();
 
 app.UseAuthorization();

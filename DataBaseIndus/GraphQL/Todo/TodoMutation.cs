@@ -20,7 +20,7 @@ namespace ToDoList.GraphQL.Task
             taskRepository = CurrentRepository.taskRepository;
             Field<TaskType, TodoModel>()
                 .Name("Create")
-                .Argument<NonNullGraphType<CreateTaskType>, CreateTodoModel>("Todo", "New task arguments")
+                .Argument<NonNullGraphType<CreateTaskType>, CreateTodoModel>("Todo", "New todo arguments")
                 .Resolve(context =>
                 {
                     var input = context.GetArgument<CreateTodoModel>("Todo");

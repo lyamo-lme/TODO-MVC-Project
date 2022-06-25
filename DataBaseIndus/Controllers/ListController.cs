@@ -36,7 +36,7 @@ namespace ToDoList.Controllers
             var category = Mapper.Map<List<CategoryViewModel>>(categories);
             ViewModel model = new ViewModel
             {
-                Tasks = taskRepository.GetTasks(),
+                Todos = taskRepository.GetTasks(),
                 categoryViewModels = category
             };
             return View("ListTasks", model);
@@ -53,7 +53,7 @@ namespace ToDoList.Controllers
             var categories = await categoryRepository.GetCategories();
             ViewModel Model = new ViewModel
             {
-                Tasks = taskRepository.GetTasks(),
+                Todos = taskRepository.GetTasks(),
                 Categories = categories
             };
             return View("ListTasks", Model); 

@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "../../store/hooks";
-import { fetchToDo, removeTodo, updateTodo } from "../../store/Slice/todo/todoSlice";
+import {  removeTodo, updateTodo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 
 
@@ -32,9 +31,7 @@ function DoneTodoList() {
                     {todo.map((item) => {
                         if (item.taskCompleted)
                             return (
-                                
                                 <tr key={item.id}>
-                                    <hr/>
                                     <td>{item.nameTodo} </td>
                                     <td>{item.deadLine == "" ? "None" : item.deadLine}</td>
                                     <td>{item.nameCategory}</td>

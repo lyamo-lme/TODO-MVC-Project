@@ -102,11 +102,12 @@ header>a.active {
 .form>div {
     flex: auto;
 }
-.doneTodo {
+.doneTodo tr{
     position: relative
 } 
 
- hr{
+
+.doneTodo tr > hr{
     top: 50%;
     position: absolute;
 }

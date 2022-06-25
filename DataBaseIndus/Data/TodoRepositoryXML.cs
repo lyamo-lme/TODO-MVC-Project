@@ -19,7 +19,7 @@ namespace ToDoList.Data
             int Id = (int)element.Element("id");
             Id++;
             XElement AddModel = new XElement("task", new XElement("id", $"{Id}"),
-                new XElement($"{nameof(model.NameTodo).ToLower()}", $"{model.NameTodo}"),
+                new XElement($"nametask", $"{model.NameTodo}"),
                 new XElement($"{nameof(model.TaskCompleted).ToLower()}", $"{model.TaskCompleted}"),
                 new XElement($"{nameof(model.DeadLine).ToLower()}", $"{model.DeadLine}"),
                 new XElement($"{nameof(model.CategoryId).ToLower()}", $"{model.CategoryId}"));
@@ -74,7 +74,7 @@ namespace ToDoList.Data
         {
             XDocument TasksXML = XDocument.Load(TasksDirectoryPath);
             XElement element = TasksXML.Descendants("tasks").Descendants("task").FirstOrDefault(x => (int)x.Element("id") == model.Id);
-            element.SetElementValue($"{nameof(model.NameTodo).ToLower()}", model.NameTodo);
+            element.SetElementValue($"nametask", model.NameTodo);
             int TaskCompleted = 0;
             if (model.TaskCompleted) { TaskCompleted = 1; }
             element.SetElementValue($"{nameof(model.TaskCompleted).ToLower()}", TaskCompleted);

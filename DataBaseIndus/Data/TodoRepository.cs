@@ -65,6 +65,8 @@ namespace ToDoList.Data
                 string sql = "Select * From Tasks Where Id=@id";
                 connection.Open();
                 TodoModel model = connection.QueryFirstOrDefault<TodoModel>(sql, new { id });
+                id = model.CategoryId;
+                model.NameCategory = connection.QueryFirstOrDefault<string>("Select NameCategory from Categories where IdCategory=@id", new { id });
                 connection.Close();
                 return model;
             }

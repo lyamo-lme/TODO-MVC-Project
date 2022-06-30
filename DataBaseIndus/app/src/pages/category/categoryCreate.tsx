@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { addCategoryAction } from "../../store/actions/category/categoryActions";
 import { useAppDispatch } from "../../store/hooks";
 import { addCategory } from "../../store/Slice/category/categorySlice";
 import { RootState } from "../../store/store";
-import { CategoryCreateType } from "../../type/category/CategoryCreateType";
+import { CategoryCreateType } from "../../type/react/category/CategoryCreateType";
 import { onChange } from "../onChange/ChangeProperyInput";
 
 
@@ -15,8 +16,7 @@ function CategoryCreate() {
     })
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch(addCategory(category));
-        console.log(categories)
+        dispatch(addCategoryAction(category));
     }
 
     const { nameCategory } = category

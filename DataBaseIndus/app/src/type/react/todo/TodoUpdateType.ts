@@ -1,17 +1,14 @@
-
-export type ToDoType={
+export type ToDoUpdateType={
     nameTodo: string,
     categoryId: number,
     taskCompleted: boolean,
-    nameCategory: string,
     id: number,
-    deadLine: string
+    deadLine: string|null
 }
-export const emptyTodo:ToDoType={
+export const emptyUpdateTodo:ToDoUpdateType={
     nameTodo: "",
     categoryId: 0,
     taskCompleted: false,
-    nameCategory: "",
     id: 0,
-    deadLine: ""
+    deadLine: "",
 }

@@ -5,8 +5,9 @@ import { addToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 import { onChange } from "../onChange/ChangeProperyInput";
 
-import { emptyCreateTodo, ToDoCreateType } from "../../type/todo/TodoCreateType";
+import { emptyCreateTodo, ToDoCreateType } from "../../type/react/todo/TodoCreateType";
 import { dateToSting } from "../../parseDate/parseDate";
+import { addTodoAction } from "../../store/actions/todo/todoActions";
 
 function TodoCreate() {
     const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
@@ -15,13 +16,9 @@ function TodoCreate() {
 
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault();
-        let nameCategory = categories.find((item) => item.idCategory == todo.categoryId)?.nameCategory;
-        dispatch(addToDo(
-            {...todo,
-                nameCategory: nameCategory != undefined ? nameCategory : "No Category",
-                deadLine: dateToSting(deadLine)
-            }))
-
+        console.log(todo);
+        dispatch(addTodoAction({ ...todo,
+        deadLine: null}))
     }
 
     const { nameTodo, deadLine, categoryId } = todo
@@ -37,7 +34,7 @@ function TodoCreate() {
                     </div>
                     <div>
                         <label> Dead Line</label>
-                        <input name="deadLine" type="datetime-local" value={deadLine} onChange={(e) => onChange((e), setTodo)} />
+                        <input name="deadLine" type="datetime-local" value={0} onChange={(e) => onChange((e), setTodo)} />
                     </div>
                     <div>
                         <label>Category</label>

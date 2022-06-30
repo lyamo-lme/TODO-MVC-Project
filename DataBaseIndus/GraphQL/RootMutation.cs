@@ -1,6 +1,7 @@
 ﻿using ToDoList.GraphQL.Categories;
 using ToDoList.GraphQL.Task;
 using GraphQL.Types;
+using ToDoList.GraphQL.Repository;
 
 namespace ToDoList.GraphQL
 {
@@ -14,6 +15,10 @@ namespace ToDoList.GraphQL
 
             Field<CategoryMutation>()
                 .Name("CategoryMutation")
+                .Resolve(_ => new { });
+
+            Field<RepositoryMutation>()
+                .Name("RepositoryMutation")
                 .Resolve(_ => new { });
 
             

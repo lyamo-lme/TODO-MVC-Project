@@ -3,31 +3,35 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { dateToSting, stringToDate } from "../../parseDate/parseDate";
+import { updateTodoAction } from "../../store/actions/todo/todoActions";
 import { useAppDispatch } from "../../store/hooks";
 import { updateTodo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
-import { emptyTodo, ToDoType as ToDoType } from "../../type/todo/TodoType";
+import { emptyTodo, ToDoType as ToDoType } from "../../type/react/todo/TodoType";
+import { ToDoUpdateType } from "../../type/react/todo/TodoUpdateType";
 
 export function TodoEdit() {
     const navigate = useNavigate();
     const { idTodo } = useParams();
     let Todo = emptyTodo;
-    let id = idTodo!=undefined? parseInt(idTodo):0;
+    let id = idTodo != undefined ? parseInt(idTodo) : 0;
     const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category);
     const findTodo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo.find(item => item.id == id))
     Todo = findTodo != undefined ? findTodo : emptyTodo;
-    const [todo, setTodo] = useState<ToDoType>({ ...Todo, deadLine: stringToDate(Todo.deadLine) });
+    const [todo, setTodo] = useState<ToDoUpdateType>({
+        nameTodo: Todo.nameTodo,
+        id: Todo.id,
+        categoryId: Todo.categoryId,
+        deadLine: Todo.deadLine,
+        taskCompleted: Todo.taskCompleted
+       });
     const dispatch = useAppDispatch();
 
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault()
-        let nameCategory = categories.find((item) => item.idCategory == todo.categoryId)?.nameCategory;
-        if (todo != undefined) {
-            dispatch(updateTodo({
-                ...todo, nameCategory: nameCategory != undefined ? nameCategory : "No Category",
-                deadLine: dateToSting(deadLine)
-            }))
-        }
+        console.log(todo);
+        dispatch(updateTodoAction({...todo,deadLine: todo.deadLine+':00'}))
+        navigate('');
         navigate('/todo');
     }
 
@@ -36,33 +40,44 @@ export function TodoEdit() {
     if (findTodo != undefined) {
         return (
             <>
-                <form onSubmit={(e) => onFinish(e)}>
-                    <div>
-                        <label> Name Todo </label>
-                        <input name='nameTodo' value={nameTodo} onChange={(e) => setTodo({ ...todo, nameTodo: e.target.value })} required />
-                    </div>
-                    <div>
-                        <label>  Dead Line   </label>
-                        <input name="deadLine" type="datetime-local" value={deadLine} onChange={(e) => setTodo({ ...todo, deadLine: e.target.value })} />
-                    </div>
-                    <div>
-                        <select name="categoryId" value={categoryId} onChange={(e) => setTodo({ ...todo, categoryId: parseInt(e.target.value) })}>
-                            <option value={0} >None</option>
-                            {categories.map((item) =>
-                                <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>
-                            )}
-                        </select>
+                <form className="block" style={{ width: "fit-content" }} onSubmit={(e) => onFinish(e)}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td> Name Todo</td>
+                                <td>  <input name='nameTodo' value={nameTodo} onChange={(e) => setTodo({ ...todo, nameTodo: e.target.value })} required />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dead Line </td>
+                                <td>   <input name="deadLine" type="datetime-local" value={deadLine!=null?deadLine:0} onChange={(e) => setTodo({ ...todo, deadLine: e.target.value })} />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Category</td>
+                                <td><select name="categoryId" value={categoryId} onChange={(e) => setTodo({ ...todo, categoryId: parseInt(e.target.value) })}>
+                                    <option value={0} >None</option>
+                                    {categories.map((item) =>
+                                        <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>
+                                    )}
+                                </select></td>
+                            </tr>
+                            <tr>
+                                <td>Status complete</td>
+                                <td>  <select name="taskCompleted" value={taskCompleted ? 1 : 0} onChange={(e) => setTodo({ ...todo, taskCompleted: parseInt(e.target.value) == 1 ? true : false })}>
+                                    <option value={0}>Undone</option>
+                                    <option value={1}>Done</option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr >
+                                <td colSpan={2}><button type="submit">Submit</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                    </div>
-                    <div>
-                        <select name="taskCompleted" value={taskCompleted ? 1 : 0} onChange={(e) => setTodo({ ...todo, taskCompleted: parseInt(e.target.value) == 1 ? true : false })}>
-                            <option value={0}>Undone</option>
-                            <option value={1}>Done</option>
-                        </select>
-                    </div>
-                    <div>
-                        <button type="submit">Submit</button>
-                    </div>
+
+
                 </form>
             </>
         );

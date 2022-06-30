@@ -8,16 +8,15 @@ namespace ToDoList.GraphQL.Task
 {
     public class TodoQuery : ObjectGraphType
     {
-        private ITodoRepository taskRepository { get; set; }
+        
         public TodoQuery(IServiceProvider serviceProvider)
         {
             CurrentRepository.ChangeRepository(serviceProvider, CurrentRepository.currentSource);
-            taskRepository = CurrentRepository.taskRepository;
             Field<NonNullGraphType<ListGraphType<TaskType>>, List<TodoModel>>()
                           .Name("GetAllTodos")
                           .Resolve(context =>
                           {
-                              return taskRepository.GetTasks();
+                              return CurrentRepository.taskRepository.GetTasks();
                           });
 
             Field<TaskType, TodoModel>()
@@ -25,7 +24,7 @@ namespace ToDoList.GraphQL.Task
                 .Argument<IntGraphType, int>("TaskId", "Get Todo By Id")
                 .Resolve(context =>
                 {
-                    return taskRepository.GetTaskId(context.GetArgument<int>("TodoId"));
+                    return CurrentRepository.taskRepository.GetTaskId(context.GetArgument<int>("TodoId"));
                 }
                 );
         }

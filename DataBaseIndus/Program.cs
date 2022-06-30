@@ -5,7 +5,6 @@ using ToDoList.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddTransient<CategoryRepositoryXML>();
 builder.Services.AddTransient<TodoRepositoryXML>();
 builder.Services.AddTransient<TodoRepository>();
@@ -23,7 +22,7 @@ builder.Services.AddCors(
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddSingleton<DataSchema>();
+builder.Services.AddTransient<DataSchema>();
 
 builder.Services
     .AddGraphQL(options =>

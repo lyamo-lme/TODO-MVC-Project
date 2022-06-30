@@ -10,12 +10,9 @@ namespace ToDoList.GraphQL.Categories
 {
     public class CategoryMutation : ObjectGraphType
     {
-        private ICategoryRepository categoryRepository { get; set; }
         public CategoryMutation(IServiceProvider serviceProvider, IMapper mapper)
         {
-            CurrentRepository.ChangeRepository(serviceProvider, CurrentRepository.currentSource);
-            categoryRepository = CurrentRepository.categoryRepository;
-
+            
             Field<CategoryType, Category>()
                   .Name("Create")
                   .Argument<NonNullGraphType<CreateCategoryType>, CreateTodoModel>("NewCategory", "New category arguments")
@@ -23,7 +20,7 @@ namespace ToDoList.GraphQL.Categories
                   {
                       var input = context.GetArgument<CreateCategory>("NewCategory");
                       var task = mapper.Map<Category>(input);
-                      task = await categoryRepository.CreateCategory(task);
+                      task = await CurrentRepository.categoryRepository.CreateCategory(task);
                       return task;
                   });
 
@@ -34,7 +31,7 @@ namespace ToDoList.GraphQL.Categories
                 {
                     var input = context.GetArgument<Category>("EditCategory");
                     var task = mapper.Map<Category>(input);
-                    return await categoryRepository.EditCategory(task);
+                    return await CurrentRepository.categoryRepository.EditCategory(task);
                 });
 
             Field<CategoryType, Category>()
@@ -43,8 +40,8 @@ namespace ToDoList.GraphQL.Categories
                 .ResolveAsync(async context =>
                 {
                     int Id = context.GetArgument<int>("DeleteId");
-                    Category model = await categoryRepository.GetCategoryById(Id);
-                    int result = await categoryRepository.DeleteCategory(Id);
+                    Category model = await CurrentRepository.categoryRepository.GetCategoryById(Id);
+                    int result = await CurrentRepository.categoryRepository.DeleteCategory(Id);
                     return model;
                 });
         }

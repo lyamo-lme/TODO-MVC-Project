@@ -12,6 +12,7 @@ namespace ToDoList.Data
         private static IServiceProvider serviceProvider { get; set; }
         public  static void ChangeRepository(IServiceProvider service, typeSource typeSource)
         {
+            currentSource = typeSource;
             serviceProvider = service;
             switch (typeSource)
             {

@@ -1,7 +1,7 @@
 
 import { combineEpics, Epic, ofType } from "redux-observable";
 import { catchError, filter, from, map, mergeMap } from "rxjs";
-import { addTodo, deleteTodo, deleteTodoAction, fetchTodoAction, updateTodoActionType } from "../../actions/todo/todoActions";
+import { addTodoActionType, deleteTodoActionType, deleteTodoAction, fetchTodoAction, updateTodoActionType } from "../../actions/todo/todoActions";
 import { queryAddTodo, queryDeleteTodo as queryDeleteTodo, queryGetAllTodo, queryUpdateTodo } from "../../queries/todoQueries";
 import { graphqlRequest } from "../../queryToApi/queryToApi";
 import { addToDo, fetchToDo, removeTodo, updateTodo } from "../../Slice/todo/todoSlice";
@@ -17,7 +17,7 @@ const fetchTodoEpic = (action$: any) =>
 
 const deleteTodoEpic = (action$: any) =>
   action$.pipe(
-    ofType(deleteTodo),
+    ofType(deleteTodoActionType),
     mergeMap((action: any) => from(graphqlRequest(queryDeleteTodo, {
       id: action.payload
     }))
@@ -41,17 +41,14 @@ const updateTodoEpic = (action$: any) =>
 
 const addTodoEpic = (action$: any) =>
   action$.pipe(
-    ofType(addTodo),
+    ofType(addTodoActionType),
     mergeMap((action: any) => from(graphqlRequest(queryAddTodo, {
       todoCreate: action.payload
     }))
       .pipe(
         map(response => {
           console.log(response);
-          return addToDo({
-            ...response.data.taskMutation.create,
-            deadLine: ""
-          });
+          return addToDo(response.data.taskMutation.create);
         }))))
 
 export const todoEpic = combineEpics(fetchTodoEpic, deleteTodoEpic, addTodoEpic, updateTodoEpic);

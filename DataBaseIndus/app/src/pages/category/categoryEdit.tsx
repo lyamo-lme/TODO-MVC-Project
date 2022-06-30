@@ -10,13 +10,11 @@ import { RootState } from "../../store/store";
 import { CategoryType as CategoryType, emptyCategoryType as emptyCategory } from "../../type/react/category/CategoryType";
 
 export function CategoryEdit() {
-    const todo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo)
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
     let Category = emptyCategory;
-    let idCategory: number;
-    idCategory = id == undefined ? 0 : parseInt(id);
+    let idCategory = id == undefined ? 0 : parseInt(id);
     const findCategory = useSelector((s: RootState) => s.rootReducer.categoryReducer.category.find(item => item.idCategory == idCategory))
     Category = findCategory != undefined ? findCategory : emptyCategory;
     const [category, setCategory] = useState<CategoryType>(Category)

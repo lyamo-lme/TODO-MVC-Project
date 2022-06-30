@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { dateToSting } from "../../parseDate/parseDate";
@@ -11,7 +12,8 @@ function DoneTodoList() {
 
     const todo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo).filter((item) => item.taskCompleted)
     const dispatch = useAppDispatch()
-
+    const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
+    const [idCategory, setCategory] = useState(0);
     const deleteTodo = (id: number) => {
         dispatch(deleteTodoAction(id))
     }
@@ -21,6 +23,12 @@ function DoneTodoList() {
     }
     return (<>
         <div className="block">
+            <select value={idCategory} onChange={(e) => setCategory(parseInt(e.target.value))}>
+                <option value={0}>None</option>
+                {categories.map((item) =>
+                    <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>
+                )}
+            </select>
             <table className="undoneTodo">
                 <caption>Done Todos</caption>
                 <tbody>
@@ -32,7 +40,7 @@ function DoneTodoList() {
                     </tr>
 
                     {todo.map((item) => {
-                        if (item.taskCompleted)
+                        if (item.taskCompleted && (!(idCategory != 0) || item.categoryId == idCategory))
                             return (
                                 <tr key={item.id}>
                                     <td>{item.nameTodo} </td>

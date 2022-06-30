@@ -68,6 +68,7 @@ namespace ToDoList.Data
                                                NameCategory = (string)categories.Element("namecategory")
                                            };
             TodoModel model = ListTasks.First();
+            model.NameCategory =  CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id).Element("namecategory").Value;
             return model;
         }
         public TodoModel UpdateTask(TodoModel model)

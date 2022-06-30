@@ -52,7 +52,6 @@ namespace ToDoList.Data
             {
                 connection.Open();
                 List<TodoModel> tasks = connection.Query<TodoModel>(query).ToList();
-
                 connection.Close();
                 return tasks;
             }

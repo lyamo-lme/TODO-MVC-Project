@@ -30,7 +30,7 @@ namespace ToDoList.Data
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XDocument TasksXML = XDocument.Load(TasksDirectoryPath);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id);
-            element.Remove();
+           
 
             Category model = new Category
             {
@@ -55,7 +55,7 @@ namespace ToDoList.Data
         {
             XDocument CategoriesXML = XDocument.Load(DirectoryPathCategories);
             XElement element = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id);
-            element.Remove();
+       
 
             Category model = new Category
             {

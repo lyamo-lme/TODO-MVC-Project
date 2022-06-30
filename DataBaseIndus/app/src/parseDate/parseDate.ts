@@ -6,6 +6,6 @@ export function dateToSting(date: string|null) {
 }
 
 export function stringToDate(date: string|null) {
-    date = moment(date).format("YYYY-M-DDTHH:mm")
+    date = moment(date).format("YYYY-M-DDTHH:mm:ss")
     return date == "Invalid date" ? null : date;
 }

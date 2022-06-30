@@ -9,6 +9,7 @@ builder.Services.AddTransient<CategoryRepositoryXML>();
 builder.Services.AddTransient<TodoRepositoryXML>();
 builder.Services.AddTransient<TodoRepository>();
 builder.Services.AddTransient<CategoryRepository>();
+
 builder.Services.AddCors(
     builder => {
         builder.AddDefaultPolicy(option =>

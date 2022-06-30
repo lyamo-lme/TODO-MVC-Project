@@ -16,9 +16,11 @@ function TodoCreate() {
 
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(todo);
-        dispatch(addTodoAction({ ...todo,
-        deadLine: null}))
+        console.log(todo.deadLine);
+        dispatch(addTodoAction({
+            ...todo,
+            deadLine: todo.deadLine!=""?todo.deadLine+':00':null
+        }))
     }
 
     const { nameTodo, deadLine, categoryId } = todo
@@ -34,11 +36,11 @@ function TodoCreate() {
                     </div>
                     <div>
                         <label> Dead Line</label>
-                        <input name="deadLine" type="datetime-local" value={0} onChange={(e) => onChange((e), setTodo)} />
+                        <input name="deadLine" type="datetime-local" value={deadLine!=null?deadLine:0} onChange={(e) => onChange((e), setTodo)} />
                     </div>
                     <div>
                         <label>Category</label>
-                        <select name="categoryId" value={categoryId} onChange={(e) => onChange((e), setTodo)}>
+                        <select name="categoryId" value={categoryId} onChange={(e) => (setTodo({...todo, categoryId: parseInt(e.target.value)}))}>
                             <option value={0} >None</option>
                             {categories.map((item) =>
                                 <option key={item.idCategory} value={item.idCategory} >{item.nameCategory}</option>

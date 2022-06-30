@@ -15,7 +15,10 @@ function UndoneTodoList() {
   const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
   const dispatch = useAppDispatch();
   const deleteTodo = (id: number) => {
+    var answer = window.confirm("Are you sure?");
+    if(answer){
     dispatch(deleteTodoAction(id));
+  }
   }
   const [idCategory, setCategory] = useState(0);
   const stringEdit = "/edit/todo/";

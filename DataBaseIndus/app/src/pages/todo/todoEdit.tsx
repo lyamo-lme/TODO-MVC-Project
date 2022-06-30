@@ -30,7 +30,8 @@ export function TodoEdit() {
     const onFinish = (e: React.FormEvent) => {
         e.preventDefault()
         console.log(todo.deadLine);
-        dispatch(updateTodoAction({...todo,deadLine: todo.deadLine!=""||todo.deadLine!=null?stringToDate(deadLine):null}))
+        dispatch(updateTodoAction({...todo,
+            deadLine: todo.deadLine!=""||todo.deadLine!=null?stringToDate(deadLine):null}))
         navigate('/todo');
     }
 

@@ -2,7 +2,7 @@
 <tasks>
   <task>
     <id>4</id>
-    <nametask>sda</nametask>
+    <nametask>SomeTask1</nametask>
     <taskcompleted>0</taskcompleted>
     <deadline></deadline>
     <categoryid>2</categoryid>
@@ -11,15 +11,36 @@
   <task>
     <id>5</id>
     <nametask>Last mission</nametask>
-    <taskcompleted>false</taskcompleted>
+    <taskcompleted>0</taskcompleted>
     <deadline></deadline>
-    <categoryid>2</categoryid>
+    <categoryid>3</categoryid>
   </task>
   <task>
     <id>6</id>
-    <nametask>sadasd</nametask>
-    <taskcompleted>true</taskcompleted>
+    <nametask>Second</nametask>
+    <taskcompleted>1</taskcompleted>
     <deadline></deadline>
     <categoryid>1</categoryid>
+  </task>
+  <task>
+    <id>7</id>
+    <nametask>HomeWork</nametask>
+    <taskcompleted>1</taskcompleted>
+    <deadline></deadline>
+    <categoryid>1</categoryid>
+  </task>
+  <task>
+    <id>8</id>
+    <nametask>List</nametask>
+    <taskcompleted>False</taskcompleted>
+    <deadline></deadline>
+    <categoryid>0</categoryid>
+  </task>
+  <task>
+    <id>10</id>
+    <nametask>HomeWork3</nametask>
+    <taskcompleted>0</taskcompleted>
+    <deadline></deadline>
+    <categoryid>2</categoryid>
   </task>
 </tasks>

@@ -1,15 +1,11 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { addCategoryAction } from "../../store/actions/category/categoryActions";
 import { useAppDispatch } from "../../store/hooks";
-import { addCategory } from "../../store/Slice/category/categorySlice";
-import { RootState } from "../../store/store";
 import { CategoryCreateType } from "../../type/react/category/CategoryCreateType";
 import { onChange } from "../onChange/ChangeProperyInput";
 
 
 function CategoryCreate() {
-    const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
     const dispatch = useAppDispatch();
     const [category, setCategory] = useState<CategoryCreateType>({
         nameCategory: ''

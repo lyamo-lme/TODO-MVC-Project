@@ -4,8 +4,6 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateCategoryAction } from "../../store/actions/category/categoryActions";
 import { useAppDispatch } from "../../store/hooks";
-import { updateCategory } from "../../store/Slice/category/categorySlice";
-import { fetchToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 import { CategoryType as CategoryType, emptyCategoryType as emptyCategory } from "../../type/react/category/CategoryType";
 
@@ -27,7 +25,7 @@ export function CategoryEdit() {
     const { nameCategory } = category
     if (category != undefined) {
         return (
-            <>  <form  className="block" style={{width:"fit-content"}}onSubmit={(e) => onFinish(e)}>
+            <>  <form className="block" style={{ width: "fit-content" }} onSubmit={(e) => onFinish(e)}>
                 <div>
                     <p>Name Category</p>
                     <input name='nameCategory' value={nameCategory} onChange={(e) => setCategory({ ...category, nameCategory: e.target.value })} required />

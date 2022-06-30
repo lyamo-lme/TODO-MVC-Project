@@ -4,7 +4,7 @@ import { catchError, filter, from, map, mergeMap } from "rxjs";
 import { addTodoActionType, deleteTodoActionType, deleteTodoAction, fetchTodoAction, updateTodoActionType } from "../../actions/todo/todoActions";
 import { queryAddTodo, queryDeleteTodo as queryDeleteTodo, queryGetAllTodo, queryUpdateTodo } from "../../queries/todoQueries";
 import { graphqlRequest } from "../../queryToApi/queryToApi";
-import { addToDo, fetchToDo, removeTodo, updateTodo } from "../../Slice/todo/todoSlice";
+import { addToDo, fetchToDo as setToDo, removeTodo, updateTodo } from "../../Slice/todo/todoSlice";
 
 
 
@@ -12,7 +12,7 @@ const fetchTodoEpic = (action$: any) =>
   action$.pipe(
     ofType(fetchTodoAction),
     mergeMap(() => from(graphqlRequest(queryGetAllTodo)).pipe(
-      map(response =>fetchToDo(response.data.tasksQueries.getAllTodos)
+      map(response =>setToDo(response.data.tasksQueries.getAllTodos)
       ))));
 
 const deleteTodoEpic = (action$: any) =>

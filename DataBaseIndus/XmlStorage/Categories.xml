@@ -8,4 +8,8 @@
     <idcategory>2</idcategory>
     <namecategory>SomeCategory 2</namecategory>
   </category>
+  <category>
+    <idcategory>3</idcategory>
+    <namecategory>SomeCategory3</namecategory>
+  </category>
 </categories>

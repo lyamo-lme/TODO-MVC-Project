@@ -6,7 +6,7 @@ import { RootState } from "../../store/store";
 import { onChange } from "../onChange/ChangeProperyInput";
 
 import { emptyCreateTodo, ToDoCreateType } from "../../type/react/todo/TodoCreateType";
-import { dateToSting } from "../../parseDate/parseDate";
+import { dateToSting, stringToDate } from "../../parseDate/parseDate";
 import { addTodoAction } from "../../store/actions/todo/todoActions";
 
 function TodoCreate() {
@@ -19,7 +19,7 @@ function TodoCreate() {
         console.log(todo.deadLine);
         dispatch(addTodoAction({
             ...todo,
-            deadLine: todo.deadLine!=""?todo.deadLine+':00':null
+            deadLine: todo.deadLine!=""||todo.deadLine!=null?stringToDate(todo.deadLine):null
         }))
     }
 

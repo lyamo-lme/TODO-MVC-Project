@@ -4,20 +4,22 @@ import { NavLink } from "react-router-dom";
 import { dateToSting } from "../../parseDate/parseDate";
 import { deleteTodoAction, fetchTodoAction, updateTodoAction } from "../../store/actions/todo/todoActions";
 import { useAppDispatch } from "../../store/hooks";
-import { removeTodo, updateTodo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 
 
 function DoneTodoList() {
-
     const todo = useSelector((s: RootState) => s.rootReducer.todoReducer.todo).filter((item) => item.taskCompleted)
     const dispatch = useAppDispatch()
     const categories = useSelector((s: RootState) => s.rootReducer.categoryReducer.category)
     const [idCategory, setCategory] = useState(0);
-    const deleteTodo = (id: number) => {
-        dispatch(deleteTodoAction(id))
-    }
     const stringEdit = "/edit/todo/"
+    const deleteTodo = (id: number) => {
+        var answer = window.confirm("Are you sure?");
+        if (answer) {
+            dispatch(deleteTodoAction(id))
+        }
+    }
+
     if (todo.length == 0) {
         return (<div className="block"><i>Non Done Todo</i></div>)
     }
@@ -38,7 +40,6 @@ function DoneTodoList() {
                         <th>Category</th>
                         <th colSpan={3}>Actions</th>
                     </tr>
-
                     {todo.map((item) => {
                         if (item.taskCompleted && (!(idCategory != 0) || item.categoryId == idCategory))
                             return (

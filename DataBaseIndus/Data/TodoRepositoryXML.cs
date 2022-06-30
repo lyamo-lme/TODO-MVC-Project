@@ -54,22 +54,17 @@ namespace ToDoList.Data
         {
             XDocument TasksXML = XDocument.Load(TasksDirectoryPath);
             XDocument CategoriesXML = XDocument.Load(CategoriesDirectoryPath);
-            IEnumerable<TodoModel> ListTasks = from tasks in TasksXML.Descendants("task")
-                                           where (int)tasks.Element("id") == id
-                                           join categories in CategoriesXML.Descendants("category")
-                                           on (int)tasks.Element("categoryid") equals (int)categories.Element("idcategory")
-                                           select new TodoModel
-                                           {
-                                               Id = (int)tasks.Element("id"),
-                                               NameTodo = (string)tasks.Element("nametask"),
-                                               DeadLine = ParseDateTime((string)tasks.Element("deadline")),
-                                               CategoryId = (int)tasks.Element("categoryid"),
-                                               TaskCompleted = (bool)tasks.Element("taskcompleted"),
-                                               NameCategory = (string)categories.Element("namecategory")
-                                           };
-            TodoModel model = ListTasks.First();
-            model.NameCategory =  CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == id).Element("namecategory").Value;
-            return model;
+            XElement todo = TasksXML.Descendants("tasks").Descendants("task").FirstOrDefault(x => (int)x.Element("id") == id);
+            TodoModel model = new TodoModel
+            {
+                NameTodo = todo.Element("nametask").Value,
+                CategoryId = (int)todo.Element("categoryid"),
+                NameCategory = CategoriesXML.Descendants("categories").Descendants("category").FirstOrDefault(x => (int)x.Element("idcategory") == (int)todo.Element("categoryid")).Element("namecategory").Value,
+                Id = (int)todo.Element("id"),
+                TaskCompleted = (bool)todo.Element("taskcompleted"),
+                DeadLine = ParseDateTime((string)todo.Element("deadline"))
+            };
+           return model;
         }
         public TodoModel UpdateTask(TodoModel model)
         {
@@ -82,6 +77,7 @@ namespace ToDoList.Data
             element.SetElementValue($"{nameof(model.CategoryId).ToLower()}", model.CategoryId);
             element.SetElementValue($"{nameof(model.DeadLine).ToLower()}", model.DeadLine.ToString());
             TasksXML.Save(TasksDirectoryPath);
+
             return GetTaskId(model.Id);
         }
         public int DeleteTask(int? id)

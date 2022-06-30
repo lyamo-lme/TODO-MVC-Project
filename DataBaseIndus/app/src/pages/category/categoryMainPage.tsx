@@ -6,10 +6,12 @@ import CategoryList from "./categoryList";
 
 
 export function CategoryMainPage() {
+    
     const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch({type: fetchCategoryAction});
     },[]);
+
     return (
         <>
             <CategoryCreate />

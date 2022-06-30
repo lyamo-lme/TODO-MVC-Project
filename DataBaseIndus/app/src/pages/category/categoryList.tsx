@@ -1,9 +1,6 @@
-import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { deleteCategoryAction, fetchCategoryAction } from "../../store/actions/category/categoryActions";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { removeCategory } from "../../store/Slice/category/categorySlice";
-import { fetchToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
 
 
@@ -13,10 +10,9 @@ function CategoryList() {
 
     const deleteCategory = (id: number) => {
         var answer = window.confirm("Are you sure?");
-        if(answer){
+        if (answer) {
             dispatch(deleteCategoryAction(id));
         }
-      
     }
     if (categories.length == 0) {
         return (

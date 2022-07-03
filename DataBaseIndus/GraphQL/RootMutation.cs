@@ -10,7 +10,7 @@ namespace ToDoList.GraphQL
         public RootMutation()
         {
             Field<TodoMutation>()
-                    .Name("TaskMutation")
+                    .Name("TasksMutation")
                     .Resolve(_ => new { });
 
             Field<CategoryMutation>()

@@ -14,7 +14,7 @@ namespace ToDoList.GraphQL.Categories
         {
             
             Field<CategoryType, Category>()
-                  .Name("Create")
+                  .Name("CreateCategory")
                   .Argument<NonNullGraphType<CreateCategoryType>, CreateTodoModel>("NewCategory", "New category arguments")
                   .ResolveAsync(async context =>
                   {

@@ -120,13 +120,9 @@ C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoL
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.csproj.CoreCompileInputs.cache
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.RazorAssemblyInfo.cache
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.RazorAssemblyInfo.cs
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\scopedcss\bundle\ToDoList.styles.css
-C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\scopedcss\projectbundle\ToDoList.bundle.scp.css
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.csproj.CopyComplete
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\ToDoList.dll
 C:\Users\Maks\source\repos\TODO-MVC-Project\DataBaseIndus\obj\Debug\net6.0\refint\ToDoList.dll

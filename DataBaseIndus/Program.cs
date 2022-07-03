@@ -32,14 +32,11 @@ builder.Services
     .AddSystemTextJson()
     .AddGraphTypes(typeof(DataSchema));
 
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
@@ -49,14 +46,7 @@ app.UseCors(x => x
          .AllowAnyOrigin()
          .AllowAnyMethod()
          .AllowAnyHeader());
-app.UseRouting();
-
-app.UseAuthorization();
 app.UseGraphQL<DataSchema>();
 app.UseGraphQLAltair();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=List}/{action=Index}/{id?}");
 
 app.Run();

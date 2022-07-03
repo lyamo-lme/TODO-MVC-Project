@@ -3,7 +3,7 @@ import { combineEpics, ofType } from "redux-observable";
 import {  from, map, mergeMap } from "rxjs";
 import { addCategoryActionType, deleteCategoryActionType, fetchCategoryActionType, fetchCategoryAction ,updateCategoryActionType as updateCategoryType } from "../../actions/category/categoryActions";
 import { queryAddCategory, queryDeleteCategory, queryGetAllCategory, queryUpdateCategory } from "../../queries/categoryQueries";
-import { graphqlRequest } from "../../queryToApi/queryToApi";
+import { graphqlRequest } from "../../requestFromApi/queryToApi";
 import { addCategory,  removeCategory, setCategory, updateCategory } from "../../Slice/category/categorySlice";
 
 

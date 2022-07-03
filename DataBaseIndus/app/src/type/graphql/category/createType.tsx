@@ -1,7 +1,7 @@
-import { TodoType } from "../todo/todoType"
+import { ToDoType } from "../../react/todo/TodoType"
 
 export type CategoryType={
     idCategory: number,
     nameCategory: string,
-    tasks: TodoType[] | null
+    tasks: ToDoType[] | null
 }

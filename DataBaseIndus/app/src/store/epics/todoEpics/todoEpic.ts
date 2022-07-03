@@ -3,7 +3,7 @@ import { combineEpics, Epic, ofType } from "redux-observable";
 import { catchError, filter, from, map, mergeMap } from "rxjs";
 import { addTodoActionType, deleteTodoActionType, deleteTodoAction, fetchTodoAction, updateTodoActionType } from "../../actions/todo/todoActions";
 import { queryAddTodo, queryDeleteTodo as queryDeleteTodo, queryGetAllTodo, queryUpdateTodo } from "../../queries/todoQueries";
-import { graphqlRequest } from "../../queryToApi/queryToApi";
+import { graphqlRequest } from "../../requestFromApi/queryToApi";
 import { addToDo, fetchToDo as setToDo, removeTodo, updateTodo } from "../../Slice/todo/todoSlice";
 
 

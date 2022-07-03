@@ -6,10 +6,7 @@ import UndoneTodoList from "../../components/todo/undoneTodo";
 import { fetchCategoryAction, fetchCategoryActionType } from "../../store/actions/category/categoryActions";
 import { fetchTodoAction } from "../../store/actions/todo/todoActions";
 import { useAppDispatch } from "../../store/hooks";
-import { fetchToDo } from "../../store/Slice/todo/todoSlice";
 import { RootState } from "../../store/store";
-import { TodoType } from "../../type/graphql/todo/todoType";
-import { ToDoType } from "../../type/react/todo/TodoType";
 
 
 function TodoList() {
@@ -20,6 +17,7 @@ function TodoList() {
     dispatch({type:  fetchTodoAction}); 
     dispatch({type: fetchCategoryAction});
   },[])
+
   return (
     <>
       <UndoneTodoList />

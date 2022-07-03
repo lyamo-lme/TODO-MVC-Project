@@ -2,7 +2,7 @@ import { combineEpics, ofType } from "redux-observable";
 import { from, map, mergeMap } from "rxjs";
 import { changeRepositoryType } from "../../actions/repositoryAction";
 import { queryChangeRepository } from "../../queries/repositoryQueries";
-import { graphqlRequest } from "../../queryToApi/queryToApi";
+import { graphqlRequest } from "../../requestFromApi/queryToApi";
 import { changeCurrentTypeSource } from "../../Slice/repository/repositorySlice";
 
 

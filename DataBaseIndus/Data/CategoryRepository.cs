@@ -25,10 +25,7 @@ namespace ToDoList.Data
         {
             using (Connection)
             {
-                string query = @"Insert INTO Categories (NameCategory)
-                       Values(@NameCategory)
-                       SELECT @@IDENTITY
-                      ";
+                string query = @"Insert INTO Categories (NameCategory) Values(@NameCategory) SELECT @@IDENTITY";
                 Connection.Open();
 
                 int Id = await Connection.QuerySingleAsync<int>(query, model);

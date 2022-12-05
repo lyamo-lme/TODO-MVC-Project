@@ -36,7 +36,7 @@ namespace ToDoList.Data
                 return GetTaskId(id);
             }
         }
-        public List<TodoModel> GetTasks(int? mode = 0)
+        public async Task<List<TodoModel>> GetTasks(int? mode = 0)
         {
             string ModeQuery = " ";
             if (mode == 1)
@@ -51,9 +51,9 @@ namespace ToDoList.Data
             using (IDbConnection connection = Connection)
             {
                 connection.Open();
-                List<TodoModel> tasks = connection.Query<TodoModel>(query).ToList();
+                var tasks = await connection.QueryAsync<TodoModel>(query);
                 connection.Close();
-                return tasks;
+                return tasks.ToList();
             }
         }
         public TodoModel GetTaskId(int? id)

@@ -9,6 +9,6 @@ namespace ToDoList.Data
         TodoModel UpdateTask(TodoModel model);
         int DeleteTask(int? id);
         
-        List<TodoModel> GetTasks(int? mode=0);
+        Task<List<TodoModel>> GetTasks(int? mode=0);
     }
 }

@@ -33,4 +33,11 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="app\package-lock.json" />
+    <_ContentIncludedByDefault Remove="app\package.json" />
+    <_ContentIncludedByDefault Remove="app\public\manifest.json" />
+    <_ContentIncludedByDefault Remove="app\tsconfig.json" />
+  </ItemGroup>
+
 </Project>

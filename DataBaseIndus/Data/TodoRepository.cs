@@ -12,7 +12,7 @@ namespace ToDoList.Data
         public TodoRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            ConnectionString = _configuration.GetConnectionString("DefaultConnection");
+            ConnectionString = _configuration["ConnectionStrings"];
         }
         public IDbConnection Connection
         {

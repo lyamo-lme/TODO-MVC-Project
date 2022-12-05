@@ -5,7 +5,7 @@ using ToDoList.Models.DbModel;
 namespace ToDoList.Controllers
 {
     [ApiController]
-    [Route(@"api\todo")]
+    [Route(@"api/todo")]
     public class TodoController:Controller
     {
         private ITodoRepository TodoRepository { get; set; }
@@ -18,8 +18,10 @@ namespace ToDoList.Controllers
         [HttpGet]
         public async Task<ActionResult<List<TodoModel>>> GetTodos()
         {
-            return await TodoRepository.GetTasks();
+            var  asasd =             await TodoRepository.GetTasks();
+            return asasd;
         }
+        
         [HttpDelete, Route("delete")]
         public  ActionResult<int> Delete(int id)
         {

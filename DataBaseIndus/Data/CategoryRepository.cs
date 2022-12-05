@@ -13,7 +13,7 @@ namespace ToDoList.Data
         public CategoryRepository(IConfiguration configuration)
         {
             this.configuration = configuration;
-            connectionString = this.configuration.GetConnectionString("DefaultConnection");
+            connectionString = configuration["ConnectionStrings"];
         }
         public IDbConnection Connection
         {

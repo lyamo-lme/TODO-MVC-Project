@@ -50,30 +50,6 @@
               "target": "Package",
               "version": "[2.0.123, )"
             },
-            "GraphQL": {
-              "target": "Package",
-              "version": "[4.7.1, )"
-            },
-            "GraphQL.MicrosoftDI": {
-              "target": "Package",
-              "version": "[4.7.1, )"
-            },
-            "GraphQL.Server.Authorization.AspNetCore": {
-              "target": "Package",
-              "version": "[5.2.0, )"
-            },
-            "GraphQL.Server.Transports.AspNetCore": {
-              "target": "Package",
-              "version": "[5.2.0, )"
-            },
-            "GraphQL.Server.Transports.AspNetCore.SystemTextJson": {
-              "target": "Package",
-              "version": "[5.2.0, )"
-            },
-            "GraphQL.Server.Ui.Altair": {
-              "target": "Package",
-              "version": "[5.2.0, )"
-            },
             "Grpc.Core": {
               "target": "Package",
               "version": "[2.46.1, )"

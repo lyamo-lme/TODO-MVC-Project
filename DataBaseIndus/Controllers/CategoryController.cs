@@ -5,7 +5,7 @@ using ToDoList.Models.DbModel;
 namespace ToDoList.Controllers
 {
     [ApiController]
-    [Route(@"api\category")]
+    [Route(@"api/category")]
     public class CategoryController:Controller
     {
         private ICategoryRepository CategoryRepository { get; set; }
